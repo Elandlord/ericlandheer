@@ -117,7 +117,7 @@
                         <p class="ml-16 text-lg leading-6 font-bold text-gray-900">Something new?</p>
                     </dt>
                     <dd class="mt-2 ml-16 text-base text-gray-500">
-                        If you think I'm missing out on an essential skill or technique, please let me know at: <a class="text-blue-400" href="">Test</a>
+                        If you think I'm missing out on an essential skill or technique, please let me know via <a class="text-blue-400" href="mailto:ericlandheer95@gmail.com">mail</a>
                     </dd>
                 </div>
 
