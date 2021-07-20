@@ -1,4 +1,4 @@
-<div class="py-12 bg-white">
+<div class="py-12 bg-white border-t-8 border-blue-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="lg:text-center">
             <h2 class="text-base text-blue-400 font-semibold tracking-wide uppercase">In level of mastery</h2>
