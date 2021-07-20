@@ -1,3 +1,132 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.skills li{
+    opacity: 0.2;
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 100px;
+    height: 100px;
+}
+
+.skills li:nth-child(even) {
+    animation: right-rotate 50s linear infinite;
+}
+
+.skills li:nth-child(odd) {
+    animation: left-rotate 50s linear infinite;
+}
+
+.skills li:nth-child(1){
+    top: 60%;
+    left: 30%;
+    width: 100px;
+    height: 100px;
+}
+
+
+.skills li:nth-child(2){
+    top: 50%;
+    left: 13%;
+    width: 100px;
+    height: 100px;
+}
+
+.skills li:nth-child(3){
+    top: 50%;
+    left: 60%;
+    width: 100px;
+    height: 100px;
+}
+
+.skills li:nth-child(4){
+    top: 50%;
+    left: 40%;
+    width: 100px;
+    height: 100px;
+}
+
+.skills li:nth-child(5){
+    top: 25%;
+    left: 65%;
+    width: 100px;
+    height: 100px;
+}
+
+.skills li:nth-child(6){
+    top: 20%;
+    left: 75%;
+    width: 100px;
+    height: 100px;
+}
+
+.skills li:nth-child(7){
+    top: 15%;
+    left: 35%;
+    width: 150px;
+    height: 150px;
+}
+
+.skills li:nth-child(8){
+    top: 20%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+.skills li:nth-child(9){
+    top: 10%;
+    left: 15%;
+    width: 100px;
+    height: 100px;
+}
+
+.skills li:nth-child(10){
+    top: 40%;
+    left: 85%;
+    width: 100px;
+    height: 100px;
+}
+
+
+
+@keyframes right-rotate {
+
+    0%{
+        transform: translateY(0) rotate(0deg);
+        border-radius: 0;
+    }
+
+    50%{
+        transform: translateX(20px) translateY(-40px) rotate(45deg);
+        border-radius: 50%;
+    }
+
+    100% {
+        transform: translateX(-20px) translateY(45px) rotate(-40deg);
+        border-radius: 0;
+    }
+
+}
+
+@keyframes left-rotate {
+
+    0%{
+        transform: translateY(0) rotate(0deg);
+        border-radius: 0;
+    }
+
+    50% {
+        transform: translateX(-20px) translateY(60px) rotate(-50deg);
+        border-radius: 0;
+    }
+
+    100%{
+        transform: translateX(20px) translateY(-70px) rotate(40deg);
+        border-radius: 50%;
+    }
+
+}
+
