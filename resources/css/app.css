@@ -105,7 +105,7 @@
     }
 
     100% {
-        transform: translateX(-20px) translateY(45px) rotate(-40deg);
+        transform: translateX(-20px) translateY(40px) rotate(-45deg);
         border-radius: 0;
     }
 
@@ -124,7 +124,7 @@
     }
 
     100%{
-        transform: translateX(20px) translateY(-70px) rotate(40deg);
+        transform: translateX(20px) translateY(-60px) rotate(50deg);
         border-radius: 50%;
     }
 
