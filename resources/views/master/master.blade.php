@@ -12,5 +12,7 @@
 <body class="bg-gray-50">
     <div id="app">
         @yield('content')
+
+        @include('master.footer')
     </div>
 </body>
