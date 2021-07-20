@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Pages\HomepageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.homepage.index');
-});
+Route::get('/', [HomepageController::class, 'index']);
