@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    cursor: url("cursors/programming.gif"), default;
+}
+
 .skills li{
     opacity: 0.2;
     position: absolute;
