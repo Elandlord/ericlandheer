@@ -17,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomepageController::class, 'index'])->name('pages.home');
 Route::get('/blog', [BlogController::class, 'index'])->name('pages.blog');
+Route::get('/blog/{blogPost}', [BlogController::class, 'show'])->name('pages.blog.detail');

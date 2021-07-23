@@ -6,12 +6,15 @@
     "license": "MIT",
     "require": {
         "php": "^7.4|^8.0",
-        "laravel/nova": "~3.0",
+        "ebess/advanced-nova-media-library": "^3.6",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.40",
-        "laravel/tinker": "^2.5"
+        "laravel/nova": "~3.0",
+        "laravel/tinker": "^2.5",
+        "spatie/shiki-php": "^1.1",
+        "whitecube/nova-flexible-content": "^0.2.8"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
