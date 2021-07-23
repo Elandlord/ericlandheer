@@ -11,8 +11,9 @@ class HomepageController extends Controller
 {
     public function index()
     {
-        $career = Experience::findMany(range(1, 3));
-        $education = Experience::findMany([4]);
+        $career = Experience::work()->get();
+
+        $education = Experience::school()->get();
 
         return view('pages.homepage.index', [
             'career' => $career,

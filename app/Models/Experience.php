@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\QueryBuilders\ExperienceQueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,7 +25,12 @@ class Experience extends Model
     ];
 
     protected $casts = [
-        'from' => 'datetime',
-        'until' => 'datetime',
+        'from' => 'date',
+        'until' => 'date',
     ];
+
+    public function newEloquentBuilder($query): ExperienceQueryBuilder
+    {
+        return new ExperienceQueryBuilder($query);
+    }
 }
