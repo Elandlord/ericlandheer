@@ -22,7 +22,7 @@
                 <div class="hidden sm:block sm:ml-6">
                     <div class="flex space-x-4">
                         <a href="{{ route('pages.home') }}" class="@if(request()->url() === route('pages.home')) font-bold bg-gray-900 text-white @else text-gray-300 hover:bg-gray-700 hover:text-white @endif px-3 py-2 rounded-md text-sm font-medium" aria-current="page">
-                            <span class="pr-2">🏡 Dashboard</span>
+                            <span class="pr-2">🏡 Home</span>
                         </a>
 
                         <a href="{{ route('pages.blog') }}" class="@if(request()->url() === route('pages.blog')) font-bold bg-gray-900 text-white @else text-gray-300 hover:bg-gray-700 hover:text-white @endif px-3 py-2 rounded-md text-sm font-medium">
@@ -40,7 +40,7 @@
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <a href="{{ route('pages.home') }}" class="@if(request()->url() === route('pages.home')) font-bold bg-gray-900 text-white @else text-gray-300 hover:bg-gray-700 hover:text-white @endif block px-3 py-2 rounded-md text-base font-medium" aria-current="page">
                 <span class="pr-2">🏡</span>
-                Dashboard
+                Home
             </a>
 
             <a href="{{ route('pages.blog') }}" class="@if(request()->url() === route('pages.blog')) font-bold bg-gray-900 text-white @else text-gray-300 hover:bg-gray-700 hover:text-white @endif block px-3 py-2 rounded-md text-base font-medium">
