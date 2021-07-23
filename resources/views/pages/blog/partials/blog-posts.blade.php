@@ -11,6 +11,12 @@
                         <p class="mt-2 text-gray-600 py-4">{{ $blogPost->intro }}</p>
                     </div>
                     <div class="flex justify-between mt-4">
+                        @forelse($blogPost->tags as $tag)
+                            <span class="text-white bg-blue-400 py-1 px-2 rounded-md">{{ $tag->name }}</span>
+                        @empty
+                        @endforelse
+                    </div>
+                    <div class="flex justify-between mt-4">
                         <a href="{{ route('pages.blog.detail', ['blogPost' => $blogPost->slug]) }}" class="text-base font-medium text-blue-400">Read more</a>
                         <p class="text-base font-medium text-blue-400">{{ $blogPost->created_at->diffForHumans() }}</p>
                     </div>

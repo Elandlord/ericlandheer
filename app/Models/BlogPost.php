@@ -4,16 +4,14 @@ namespace App\Models;
 
 use App\Casts\FlexibleBody;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
-use Illuminate\Database\Eloquent\Casts\AsCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\ShikiPhp\Shiki;
+use Spatie\Tags\HasTags;
 use Whitecube\NovaFlexibleContent\Concerns\HasFlexible;
 use Whitecube\NovaFlexibleContent\Value\FlexibleCast;
 
@@ -22,6 +20,7 @@ class BlogPost extends Model implements HasMedia
     use HasFactory;
     use InteractsWithMedia;
     use HasFlexible;
+    use HasTags;
 
     protected $fillable = [
         'title',
