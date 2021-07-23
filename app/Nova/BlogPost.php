@@ -58,7 +58,7 @@ class BlogPost extends Resource
 
             Flexible::make('Body')
                 ->addLayout('Content section', 'section', [
-                    Trix::make('section'),
+                    Textarea::make('section'),
                 ]),
 
             Images::make('Blog image', 'blog_image')
