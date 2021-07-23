@@ -1,6 +1,6 @@
 <div class="container mx-auto mb-20">
     <div class="flex flex-col ">
-        <div class="absolute top-0 left-0 w-full h-100 xl:h-190">
+        <div class="absolute top-0 left-0 w-full h-full">
             <ul class="skills hidden md:block">
                 <li>
                     <img src="assets/images/laravel.png"/>
