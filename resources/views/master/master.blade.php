@@ -11,6 +11,8 @@
 </html>
 <body class="bg-gray-50">
     <div id="app">
+        @include('master.navbar')
+
         @yield('content')
 
         @include('master.footer')
