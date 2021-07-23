@@ -1,11 +1,24 @@
-<div class="container mx-auto mb-20">
-    <div>
-        @forelse($blog ?? collect() as $newsMessage)
-            // Blog post here
-        @empty
-            <div class="text-center">
+<div class="bg-white">
+    <div class="container mx-auto py-20">
+        <div class="grid lg:grid-cols-2 xl:grid-cols-3 gap-8 text-center">
+            @forelse($blogPosts as $blogPost)
+                <div class="py-8 px-8 bg-white shadow-lg rounded-lg my-8">
+                    <div class="flex justify-center md:justify-end -mt-16">
+                        <img class="w-20 h-20 object-cover rounded-full border-2 border-blue-400" src="{{ $blogPost->blogImage }}">
+                    </div>
+                    <div class="text-left">
+                        <h2 class="text-gray-800 text-2xl font-semibold">{{ $blogPost->title }}</h2>
+                        <p class="mt-2 text-gray-600 py-4">{{ $blogPost->intro }}</p>
+                    </div>
+                    <div class="flex justify-between mt-4">
+                        <a href="{{ route('pages.blog.detail', ['blogPost' => $blogPost->slug]) }}" class="text-base font-medium text-blue-400">Read more</a>
+                        <p class="text-base font-medium text-blue-400">{{ $blogPost->created_at->diffForHumans() }}</p>
+                    </div>
+                </div>
+            @empty
                 <h3 class="text-xl font-bold">🤨 Nothing found</h3>
-            </div>
-        @endforelse
+            @endforelse
+        </div>
     </div>
 </div>
+
