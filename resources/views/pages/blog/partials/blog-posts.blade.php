@@ -8,7 +8,7 @@
                     </div>
                     <div class="text-left">
                         <h2 class="text-gray-800 text-2xl font-semibold">{{ $blogPost->title }}</h2>
-                        <p class="mt-2 text-gray-600 py-4">{{ $blogPost->intro }}</p>
+                        <p class="mt-2 text-gray-600 py-4">{{ strip_divs($blogPost->intro) }}</p>
                     </div>
                     <div class="flex mt-4">
                         @forelse($blogPost->tags as $tag)
