@@ -13,7 +13,7 @@
                     <div class="mt-auto">
                         <div class="flex mt-4">
                             @forelse($blogPost->tags as $tag)
-                                <span class="text-white bg-blue-400 py-1 px-2 rounded-md mr-2">{{ $tag->name }}</span>
+                                <a href="{{ route('pages.blog', ['tag' => $tag->name]) }}" class="text-white bg-blue-400 py-1 px-2 rounded-md mr-2">{{ $tag->name }}</a>
                             @empty
                             @endforelse
                         </div>

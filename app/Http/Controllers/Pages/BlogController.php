@@ -10,9 +10,15 @@ use Spatie\ShikiPhp\Shiki;
 
 class BlogController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $blogPosts = BlogPost::latest()->get();
+        $blogPostQueryBuilder = BlogPost::latest();
+
+        if ($tag = $request->query('tag')) {
+            $blogPostQueryBuilder = $blogPostQueryBuilder->forTag($tag);
+        }
+
+        $blogPosts = $blogPostQueryBuilder->get();
 
         return view('pages.blog.index', compact('blogPosts'));
     }
