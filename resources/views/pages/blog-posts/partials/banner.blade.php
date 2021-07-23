@@ -19,7 +19,7 @@
                     {{ $blogPost->title }}
                 </p>
                 <p class="mt-4 max-w-2xl text-xl text-gray-500 leading-loose">
-                    {{ $blogPost->intro }}
+                    {!! nl2br(strip_divs($blogPost->intro)) !!}
                 </p>
             </div>
 

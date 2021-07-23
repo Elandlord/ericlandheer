@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\Trix;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Spatie\TagsField\Tags;
 use Whitecube\NovaFlexibleContent\Flexible;
@@ -52,12 +53,12 @@ class BlogPost extends Resource
             Text::make('Title', 'title')
                 ->required(),
 
-            Textarea::make('Intro', 'intro')
+            Trix::make('Intro', 'intro')
                 ->required(),
 
             Flexible::make('Body')
                 ->addLayout('Content section', 'section', [
-                    Textarea::make('section'),
+                    Trix::make('section'),
                 ]),
 
             Images::make('Blog image', 'blog_image')
