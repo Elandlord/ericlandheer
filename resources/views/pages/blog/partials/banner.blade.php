@@ -2,9 +2,8 @@
     <div class="pt-8">
         @if (request()->has('tag'))
             <div>
-                Filtered on: <span >{{ request()->get('tag') }}
-                            <a class="text-blue-400" href="{{ route('pages.blog') }}"> Unset</a>
-
+                Filtered on: <span >{{ request()->get('tag') }} </span>
+                <a class="text-blue-400" href="{{ route('pages.blog') }}"> Unset</a>
             </div>
         @endif
     </div>
