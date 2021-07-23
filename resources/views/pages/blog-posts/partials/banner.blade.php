@@ -14,12 +14,16 @@
                     @endforelse
                 </div>
 
-                <h2 class="text-base text-blue-400 font-semibold tracking-wide uppercase">{{ $blogPost->created_at->diffForHumans() }}</h2>
+                <h2 class="text-base text-blue-400 font-semibold tracking-wide uppercase">{{ $blogPost->created_at->diffForHumans() }} </h2>
                 <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
                     {{ $blogPost->title }}
                 </p>
                 <p class="mt-4 max-w-2xl text-xl text-gray-500 leading-loose">
                     {!! nl2br(strip_divs($blogPost->intro)) !!}
+                </p>
+
+                <p class="text-gray-400 font-bold mt-8">
+                    👀 <span class="pl-2">{{ $blogPost->views }} views</span>
                 </p>
             </div>
 
