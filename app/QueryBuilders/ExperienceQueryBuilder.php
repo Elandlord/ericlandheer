@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ExperienceQueryBuilder extends Builder
 {
-    public function work()
+    public function work(): Builder
     {
         return $this->where('type', Experience::$types['WORK']);
     }
 
-    public function school()
+    public function school(): Builder
     {
         return $this->where('type', Experience::$types['SCHOOL']);
     }
