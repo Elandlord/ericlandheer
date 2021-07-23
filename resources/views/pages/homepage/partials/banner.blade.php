@@ -1,6 +1,6 @@
 <div class="container mx-auto mb-20">
     <div class="flex flex-col ">
-        <div class="absolute top-0 left-0 w-full h-full">
+        <div class="absolute top-40 sm:top-10 left-0 w-full h-full">
             <ul class="skills hidden md:block">
                 <li>
                     <img src="assets/images/laravel.png"/>
@@ -46,7 +46,7 @@
                     Eric Landheer
                 </h1>
                 <h2 class="text-gray-800 text-2xl sm:text-3xl sm:leading-none font-bold leading-loose mb-4">
-                    Full stack webdeveloper
+                    Full stack webdeveloper 🚀
                 </h2>
 
                 <p class="text-lg text-black tracking-wide leading-loose">
