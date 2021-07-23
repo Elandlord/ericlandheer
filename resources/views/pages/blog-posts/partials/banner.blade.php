@@ -3,7 +3,7 @@
         <div class="flex flex-col md:flex-row items-center">
             <div class="flex justify-center mb-4 md:mr-12">
                 <div class="w-40 h-40 md:w-100 md:h-100 rounded-full overflow-hidden">
-                    <img class="w-full h-full" src="{{ $blogPost->blogImage }}" />
+                    <img class="w-full h-full object-cover" src="{{ $blogPost->blogImage }}" />
                 </div>
             </div>
             <div>
