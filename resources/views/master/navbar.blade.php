@@ -30,7 +30,7 @@
             <!-- Mobile menu button -->
             <div class="md:hidden flex items-center">
                 <button class="outline-none mobile-menu-button">
-                    <svg class=" w-6 h-6 text-gray-500 hover:text-green-500 "
+                    <svg class=" w-6 h-6 text-gray-500 hover:text-blue-400 "
                          x-show="!showMenu"
                          fill="none"
                          stroke-linecap="round"
@@ -48,10 +48,8 @@
     <!-- mobile menu -->
     <div class="hidden mobile-menu">
         <ul class="">
-            <li class="active"><a href="index.html" class="block text-sm px-2 py-4 text-white bg-green-500 font-semibold">Home</a></li>
-            <li><a href="#services" class="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Services</a></li>
-            <li><a href="#about" class="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">About</a></li>
-            <li><a href="#contact" class="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Contact Us</a></li>
+            <li><a href="{{ route('pages.home') }}" class="@if(request()->route()->getName() === 'pages.home') text-white bg-blue-400 font-bold @endif block text-sm px-2 py-4"><span class="pr-2">🏡</span> Home</a></li>
+            <li><a href="{{ route('pages.blog') }}" class="@if(in_array(request()->route()->getName(), ['pages.blog', 'pages.blog.detail'])) text-white bg-blue-400 font-bold @endif block text-sm px-2 py-4"><span class="pr-2">✍🏻</span> Blog</a></li>
         </ul>
     </div>
     <script>

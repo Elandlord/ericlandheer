@@ -38,7 +38,7 @@
             <div class="flex justify-center">
                 <div class="shadow-md w-full rounded-full overflow-hidden border-2" style="max-width: 400px; max-height: 400px;">
                     <img class="relative w-full h-full object-cover " src="assets/images/eric-resume.png" />
-                    <div class="flex absolute top-72 transform rotate-340 top-80 sm:top-100 left-80 xl:left-100  items-center justify-center bg-white px-2 py-2 rounded-full">
+                    <div class="hidden sm:flex absolute top-72 transform rotate-340 top-80 sm:top-100 left-80 xl:left-100  items-center justify-center bg-white px-2 py-2 rounded-full">
                         <svg xmlns="http://www.w3.org/2000/svg" class="text-blue-400 h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
                         </svg>
