@@ -6,6 +6,7 @@ use App\Casts\FlexibleBody;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -84,5 +85,15 @@ class BlogPost extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('blog_image')->singleFile();
+    }
+
+    public function getViewsAttribute(): int
+    {
+        return Redis::get(sprintf('blog_%d_views', $this->id));
+    }
+
+    public function incrementView()
+    {
+        Redis::incr(sprintf('blog_%d_views', $this->id), 1);
     }
 }
