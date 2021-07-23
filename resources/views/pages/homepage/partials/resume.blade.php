@@ -22,7 +22,7 @@
                             </div>
                             <p class="ml-16 text-lg leading-6 font-bold text-gray-900">{{ $job->title }}</p>
                             <p class="ml-16 text-gray-400 py-1">{{ $job->company }} - {{ $job->city }}</p>
-                            <p class="ml-16 text-blue-400 py-1">{{ $job->from }} - @if( !empty($job->until)) {{ $job->until }} @else now @endif</p>
+                            <p class="ml-16 text-blue-400 py-1">{{ $job->from->format('F Y') }} - @if( !empty($job->until)) {{ $job->until->format('F Y') }} @else now @endif</p>
                         </dt>
                         <dd class="mt-2 ml-16 text-base text-gray-500">
                             {{ $job->description }}
@@ -49,7 +49,7 @@
                                 </div>
                                 <p class="ml-16 text-lg leading-6 font-bold text-gray-900">{{ $school->title }}</p>
                                 <p class="ml-16 text-gray-400 py-1">{{ $school->company }} - {{ $school->city }}</p>
-                                <p class="ml-16 text-blue-400 py-1">{{ $school->from }} - @if( !empty($school->until)) {{ $school->until }} @else now @endif</p>
+                                <p class="ml-16 text-blue-400 py-1">{{ $school->from->format('F Y') }} - @if( !empty($school->until)) {{ $school->until->format('F Y') }} @else now @endif</p>
                             </dt>
                             <dd class="mt-2 ml-16 text-base text-gray-500">
                                 {{ $job->description }}

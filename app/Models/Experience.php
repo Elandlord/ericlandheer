@@ -20,8 +20,11 @@ class Experience extends Model
         'description',
         'company',
         'city',
-        'from',
-        'until',
         'type',
+    ];
+
+    protected $casts = [
+        'from' => 'datetime',
+        'until' => 'datetime',
     ];
 }
