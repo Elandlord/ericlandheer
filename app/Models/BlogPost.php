@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Casts\FlexibleBody;
+use App\QueryBuilders\BlogPostQueryBuilder;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -85,6 +86,11 @@ class BlogPost extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('blog_image')->singleFile();
+    }
+
+    public function newEloquentBuilder($query): BlogPostQueryBuilder
+    {
+        return new BlogPostQueryBuilder($query);
     }
 
     public function getViewsAttribute(): int
