@@ -2,7 +2,7 @@
     <div class="container mx-auto py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div>
-                <div>
+                <div class="overflow-x-scroll">
                     @forelse($blogPost->formatted_body as $contentPart)
                         <div>
                             {!! $contentPart !!}

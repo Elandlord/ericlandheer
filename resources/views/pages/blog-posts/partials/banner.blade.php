@@ -18,7 +18,7 @@
                 <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
                     {{ $blogPost->title }}
                 </p>
-                <p class="mt-4 max-w-2xl text-xl text-gray-500 leading-loose lg:mx-auto">
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 leading-loose">
                     {{ $blogPost->intro }}
                 </p>
             </div>
