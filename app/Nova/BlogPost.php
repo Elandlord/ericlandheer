@@ -8,6 +8,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Spatie\TagsField\Tags;
 use Whitecube\NovaFlexibleContent\Flexible;
 
 class BlogPost extends Resource
@@ -62,6 +63,8 @@ class BlogPost extends Resource
             Images::make('Blog image', 'blog_image')
                 ->conversionOnIndexView('thumb')
                 ->rules('required'),
+
+            Tags::make('Tags'),
         ];
     }
 
