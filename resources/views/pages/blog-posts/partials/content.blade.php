@@ -4,7 +4,9 @@
             <div>
                 <div>
                     @forelse($blogPost->formattedBody as $contentPart)
-                        {!! $contentPart !!}
+                        <div>
+                            {!! $contentPart !!}
+                        </div>
                     @empty
                         <h3 class="text-xl font-bold text-center">🤨 Nothing found</h3>
                     @endforelse
