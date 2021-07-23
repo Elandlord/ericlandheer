@@ -10,9 +10,9 @@
                         <h2 class="text-gray-800 text-2xl font-semibold">{{ $blogPost->title }}</h2>
                         <p class="mt-2 text-gray-600 py-4">{{ $blogPost->intro }}</p>
                     </div>
-                    <div class="flex justify-between mt-4">
+                    <div class="flex mt-4">
                         @forelse($blogPost->tags as $tag)
-                            <span class="text-white bg-blue-400 py-1 px-2 rounded-md">{{ $tag->name }}</span>
+                            <span class="text-white bg-blue-400 py-1 px-2 rounded-md mr-2">{{ $tag->name }}</span>
                         @empty
                         @endforelse
                     </div>

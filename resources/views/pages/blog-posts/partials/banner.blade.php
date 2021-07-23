@@ -7,6 +7,13 @@
                 </div>
             </div>
             <div>
+                <div class="mb-4">
+                    @forelse($blogPost->tags as $tag)
+                        <span class="text-white bg-blue-400 py-1 px-2 rounded-md mr-2">{{ $tag->name }}</span>
+                    @empty
+                    @endforelse
+                </div>
+
                 <h2 class="text-base text-blue-400 font-semibold tracking-wide uppercase">{{ $blogPost->created_at->diffForHumans() }}</h2>
                 <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
                     {{ $blogPost->title }}
