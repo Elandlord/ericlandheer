@@ -13,4 +13,16 @@ class BlogPostQueryBuilder extends Builder
             $query->where(sprintf('slug->%s', app()->getLocale()), Str::slug($tag));
         });
     }
+
+    public function search(string $searchParam)
+    {
+        $formattedSearchParam = '%'. $searchParam . '%';
+
+        return $this->where('title', 'LIKE', $formattedSearchParam)
+            ->orWhere('intro', 'LIKE', $formattedSearchParam)
+            ->orWhere('formatted_body', $formattedSearchParam)
+            ->orWhereHas('tags', function($query) use ($formattedSearchParam) {
+                $query->where(sprintf('name->%s', app()->getLocale()), 'LIKE', $formattedSearchParam);
+            });
+    }
 }

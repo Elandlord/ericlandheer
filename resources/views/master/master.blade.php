@@ -6,7 +6,7 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
     <title>Eric Landheer | Webdeveloper | Interactive resume</title>
-
+    @livewireStyles
 </head>
 </html>
 <body class="bg-gray-50">
@@ -19,4 +19,5 @@
     </div>
 
     <script src="{{ mix('js/app.js') }}"></script>
+    @livewireScripts
 </body>
