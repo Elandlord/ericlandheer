@@ -12,15 +12,7 @@ class BlogController extends Controller
 {
     public function index(Request $request)
     {
-        $blogPostQueryBuilder = BlogPost::latest();
-
-        if ($tag = $request->query('tag')) {
-            $blogPostQueryBuilder = $blogPostQueryBuilder->forTag($tag);
-        }
-
-        $blogPosts = $blogPostQueryBuilder->get();
-
-        return view('pages.blog.index', compact('blogPosts'));
+        return view('pages.blog.index');
     }
 
     public function show(BlogPost $blogPost)
