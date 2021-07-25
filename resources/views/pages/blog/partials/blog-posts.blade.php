@@ -5,7 +5,10 @@
         </div>
     @endif
     <div class="container mx-auto py-20">
-        <div class="grid lg:grid-cols-2 xl:grid-cols-3 gap-8 text-center">
+        <div wire:loading.delay wire:target="search">
+            <p class="text-center">Loading blogposts...</p>
+        </div>
+        <div wire:loading.remove.delay wire:target="search" class="grid lg:grid-cols-2 xl:grid-cols-3 gap-8 text-center animate-fade-in-down" >
             @forelse($blogPosts as $blogPost)
                 @include('pages.blog.partials.blog-card')
             @empty
