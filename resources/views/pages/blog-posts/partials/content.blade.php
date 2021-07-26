@@ -1,6 +1,6 @@
 <div class="bg-white">
     <div class="container mx-auto py-20">
-        <div class="px-4 sm:px-6 lg:px-8">
+        <div class="px-4 sm:px-6 lg:px-0">
             <div>
                 <div class="overflow-x-scroll">
                     @forelse($blogPost->formatted_body as $contentPart)
