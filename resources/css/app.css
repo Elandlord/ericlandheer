@@ -6,6 +6,10 @@ body {
     cursor: url("cursors/programming.gif"), default;
 }
 
+p > a {
+    color: #60A5FA;
+}
+
 .skills li{
     opacity: 0.2;
     position: absolute;
@@ -133,4 +137,3 @@ body {
     }
 
 }
-
