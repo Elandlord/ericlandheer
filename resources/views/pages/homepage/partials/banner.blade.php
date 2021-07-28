@@ -66,8 +66,8 @@
                 </p>
 
                 <p class="text-lg text-black tracking-wide leading-loose mt-4">
-                    The aforementioned connecting (and building), I mostly do using <a href="">Laravel</a> and <a href="">Vue.js</a>, and have been playing around
-                    with <a href="">Go</a> and <a href="">Firebase</a> as of late.
+                    The aforementioned connecting (and building), I mostly do using <a href="https://laravel.com/">Laravel</a> and <a href="https://vuejs.org/">Vue.js</a>, and have been playing around
+                    with <a href="https://golang.org/">Go</a> and <a href="https://firebase.google.com/">Firebase</a> as of late.
                 </p>
 {{--                <p class="text-black tracking-wide leading-loose mt-4">--}}
 {{--                    Although PHP is viewed as an old and outdated language, it yet still powers <a href="https://kinsta.com/blog/is-php-dead/"> almost 8 out of 10 of the websites</a>.--}}
