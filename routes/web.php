@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GlitterPlaatjeController;
 use App\Http\Controllers\Pages\BlogController;
 use App\Http\Controllers\Pages\HomepageController;
 use Illuminate\Support\Facades\Route;
@@ -18,3 +19,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomepageController::class, 'index'])->name('pages.home');
 Route::get('/blog', [BlogController::class, 'index'])->name('pages.blog');
 Route::get('/blog/{blogPost}', [BlogController::class, 'show'])->name('pages.blog.detail');
+Route::get('/breek-de-week', [GlitterPlaatjeController::class, 'wednesday'])->name('break.wednesday');
