@@ -8,7 +8,15 @@ use Intervention\Image\Facades\Image;
 class GlitterPlaatjeController extends Controller
 {
     const GLITTER_PLAATJE_XML_SRC = "https://www.deelplaatjes.nl/webmasters/rss?i=dagen-vd-week";
-    const WEDNESDAY = "woensdag";
+    const DAYS_LOOKUP_TABLE = [
+        'zondag',
+        'maandag',
+        'dinsdag',
+        'woensdag',
+        'donderdag',
+        'vrijdag',
+        'zaterdag',
+    ];
 
     /**
      * @return array
@@ -45,14 +53,16 @@ class GlitterPlaatjeController extends Controller
     /**
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function wednesday()
+    public function forToday()
     {
+        $today = self::DAYS_LOOKUP_TABLE[now()->dayOfWeek];
+
         $glitterPlaatjes = $this->getGlitterPlaatjes();
-        $woensdagPlaatjes = $this->getGlitterPlaatjesForDay($glitterPlaatjes, self::WEDNESDAY);
+        $glitterPlaatjesToday = $this->getGlitterPlaatjesForDay($glitterPlaatjes, $today);
 
-        if (count($woensdagPlaatjes) === 0) return 'Voor {$self::WEDNESDAY} glitterplaatje :(';
+        if (count($glitterPlaatjesToday) === 0) return 'Geen {$today} glitterplaatje gevonden :(';
 
-        $randomPlaatje = $woensdagPlaatjes[array_rand($woensdagPlaatjes)];
+        $randomPlaatje = $glitterPlaatjesToday[array_rand($glitterPlaatjesToday)];
         $contents = file_get_contents($randomPlaatje->plaatje_groot_url);
 
         return Image::make($contents)->response();
