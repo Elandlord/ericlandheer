@@ -42,6 +42,10 @@ class GlitterPlaatjeController extends Controller
     {
         return array_filter($glitterPlaatjes, function($plaatje) use ($day) {
             foreach($plaatje as $value) {
+                if (!is_string($value)) {
+                    continue;
+                }
+
                 if (strpos(strtolower($value), $day) !== false) {
                     return true;
                 }
