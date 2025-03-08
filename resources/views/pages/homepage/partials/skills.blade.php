@@ -63,9 +63,7 @@
                     </dt>
                     <dd class="mt-2 ml-16 text-base text-gray-500">
                         <i>But it works on my local machine?</i>
-                        This sentence should be a thing of the past using Docker. I have been using Docker locally for years.
-                        Even though I do not fully master deployment and orchestration with Docker (yet!), I do see the benefits it has and am <strong>keen</strong>
-                        to develop my Docker-skills this the coming months.
+                        This sentence should be a thing of the past using Docker. I have been using Docker for years.
                     </dd>
                 </div>
 
@@ -91,7 +89,7 @@
                         <p class="ml-16 text-lg leading-6 font-bold text-gray-900">Flutter</p>
                     </dt>
                     <dd class="mt-2 ml-16 text-base text-gray-500">
-                        Despite the fact that I have never launched an app through the Google Play Store / Apple App Store, I have occasionally worked with Flutter. I trust to one day launch a full-fledged app with Flutter.
+                         I have occasionally worked with Flutter. I trust to one day launch a full-fledged app with Flutter.
                     </dd>
                 </div>
 
