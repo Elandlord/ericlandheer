@@ -69,17 +69,13 @@
                     The aforementioned connecting (and building), I mostly do using <a href="https://laravel.com/">Laravel</a> and <a href="https://vuejs.org/">Vue.js</a>, and have been playing around
                     with <a href="https://golang.org/">Go</a> and <a href="https://firebase.google.com/">Firebase</a> as of late.
                 </p>
-{{--                <p class="text-black tracking-wide leading-loose mt-4">--}}
-{{--                    Although PHP is viewed as an old and outdated language, it yet still powers <a href="https://kinsta.com/blog/is-php-dead/"> almost 8 out of 10 of the websites</a>.--}}
-{{--                    The improvements of the language as of PHP 7.4 and PHP 8.0, makes PHP an adult language that is here to stay.--}}
-{{--                </p>--}}
                 <div class="grid grid-cols-1 md:grid-cols-2 mt-8">
                     <div class="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="text-blue-400 h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M6 3a1 1 0 011-1h.01a1 1 0 010 2H7a1 1 0 01-1-1zm2 3a1 1 0 00-2 0v1a2 2 0 00-2 2v1a2 2 0 00-2 2v.683a3.7 3.7 0 011.055.485 1.704 1.704 0 001.89 0 3.704 3.704 0 014.11 0 1.704 1.704 0 001.89 0 3.704 3.704 0 014.11 0 1.704 1.704 0 001.89 0A3.7 3.7 0 0118 12.683V12a2 2 0 00-2-2V9a2 2 0 00-2-2V6a1 1 0 10-2 0v1h-1V6a1 1 0 10-2 0v1H8V6zm10 8.868a3.704 3.704 0 01-4.055-.036 1.704 1.704 0 00-1.89 0 3.704 3.704 0 01-4.11 0 1.704 1.704 0 00-1.89 0A3.704 3.704 0 012 14.868V17a1 1 0 001 1h14a1 1 0 001-1v-2.132zM9 3a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zm3 0a1 1 0 011-1h.01a1 1 0 110 2H13a1 1 0 01-1-1z" clip-rule="evenodd" />
                         </svg>
                         <div class="ml-4">
-                            <p class="font-bold">February 2, 1995</p>
+                            <p class="font-bold">Winter of '95</p>
                         </div>
                     </div>
                     <div class="flex items-center mt-4 md:mt-0">
@@ -90,22 +86,6 @@
                             <p class="font-bold">Graduated HBO-ICT</p>
                         </div>
                     </div>
-                    <div class="flex items-center mt-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="text-blue-400 h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M14.243 5.757a6 6 0 10-.986 9.284 1 1 0 111.087 1.678A8 8 0 1118 10a3 3 0 01-4.8 2.401A4 4 0 1114 10a1 1 0 102 0c0-1.537-.586-3.07-1.757-4.243zM12 10a2 2 0 10-4 0 2 2 0 004 0z" clip-rule="evenodd" />
-                        </svg>
-                        <div class="ml-4">
-                            <a href="mailto:ericlandheer95@gmail.com" class="font-bold">ericlandheer95@gmail.com</a>
-                        </div>
-                    </div>
-{{--                    <div class="flex items-center mt-4 md:mt-0">--}}
-{{--                        <svg xmlns="http://www.w3.org/2000/svg" class="text-blue-400 h-8 w-8" viewBox="0 0 20 20" fill="currentColor">--}}
-{{--                            <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clip-rule="evenodd" />--}}
-{{--                        </svg>--}}
-{{--                        <div class="ml-4">--}}
-{{--                            <p class="font-bold">Open to job offers (+- 24h)</p>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
                     <div class="flex items-center mt-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="text-blue-400 h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
