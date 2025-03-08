@@ -40,6 +40,18 @@
 
                 <div class="relative">
                     <dt>
+                        <div class="absolute flex items-center justify-center h-12 w-12 ">
+                            <img src="/assets/images/symfony.png" />
+                        </div>
+                        <p class="ml-16 text-lg leading-6 font-bold text-gray-900">Symfony</p>
+                    </dt>
+                    <dd class="mt-2 ml-16 text-base text-gray-500">
+                        I have been building microservices with Symfony (and API Platform). I prefer Symfony over Laravel to create microservices mostly because of the support for Doctrine.
+                    </dd>
+                </div>
+
+                <div class="relative">
+                    <dt>
                         <div class="absolute flex items-center justify-center h-12 w-12 rounded-md">
                             <img src="/assets/images/vue.png" />
 
