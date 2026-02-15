@@ -2,20 +2,32 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function test_example()
+    public function test_homepage_is_available(): void
     {
-        $response = $this->get('/');
+        $response = $this->get(route('pages.home'));
 
-        $response->assertStatus(200);
+        $response->assertOk();
+        $response->assertSee('Interactive Resume');
+        $response->assertDontSee('Blog');
+    }
+
+    public function test_blog_root_is_permanently_redirected_to_homepage(): void
+    {
+        $response = $this->get('/blog');
+
+        $response->assertStatus(301);
+        $response->assertRedirect('/');
+    }
+
+    public function test_blog_subpaths_are_permanently_redirected_to_homepage(): void
+    {
+        $response = $this->get('/blog/outdated-post');
+
+        $response->assertStatus(301);
+        $response->assertRedirect('/');
     }
 }
