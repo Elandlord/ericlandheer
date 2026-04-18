@@ -8,6 +8,7 @@ export interface ExperienceItem {
     description: string;
     type: 'work' | 'school' | 'certification';
     upcoming?: boolean;
+    url?: string;
 }
 
 export const jobs: ExperienceItem[] = [
@@ -89,13 +90,35 @@ export const education: ExperienceItem[] = [
         type: 'school',
     },
     {
-        title: 'Laravel Certification',
+        title: 'Senior Laravel Developer Exam',
         company: 'Laravel LLC',
         city: 'Arkansas City',
         image: '/assets/images/laravel.png',
         from: '2021-11-01',
         until: '2021-11-30',
-        description: 'Official Laravel Certification issued by Laravel LLC.',
+        description: 'Official Senior Laravel Developer certification issued by Laravel LLC.',
+        type: 'certification',
+        url: 'https://verifier.certificationforlaravel.org/66cb0c49-e756-4aaa-a92a-01a7c66bd4c4',
+    },
+    {
+        title: 'Agile Scrum Master Training',
+        company: 'Agile Scrum Group',
+        city: 'Remote',
+        image: null,
+        from: '2025-05-01',
+        until: '2025-05-31',
+        description: 'Scrum Master training covering sprint facilitation, backlog refinement, and team coaching.',
+        type: 'certification',
+        url: 'https://agilescrumgroup.nl/scrum-master/',
+    },
+    {
+        title: 'Anglia English (Level C1)',
+        company: 'Anglia & Optima',
+        city: 'Groningen',
+        image: null,
+        from: '2009-05-01',
+        until: '2009-05-31',
+        description: 'Anglia English Proficiency Level C1 certification.',
         type: 'certification',
     },
 ];

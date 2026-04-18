@@ -36,6 +36,17 @@
                             <h3 class="font-display text-xl font-semibold text-white">{{ item.title }}</h3>
                             <p class="text-sm text-slate-400">{{ item.company }} · {{ item.city }}</p>
                             <p class="mt-3 text-sm leading-relaxed text-slate-300">{{ item.description }}</p>
+                            <a
+                                v-if="item.url"
+                                :href="item.url"
+                                target="_blank"
+                                rel="noreferrer"
+                                class="mt-4 inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1 text-xs font-semibold text-accent-soft ring-1 ring-white/10 transition hover:bg-white/10 hover:text-white"
+                            >
+                                <Icon name="ph:seal-check-fill" class="h-3.5 w-3.5" />
+                                Verify certificate
+                                <Icon name="ph:arrow-up-right-bold" class="h-3 w-3" />
+                            </a>
                         </div>
                     </article>
                 </li>
