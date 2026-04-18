@@ -15,7 +15,7 @@ export const jobs: ExperienceItem[] = [
         title: 'Senior Engineer',
         company: 'Simplicate',
         city: 'Groningen',
-        image: null,
+        image: '/assets/images/simplicate.svg',
         from: '2026-06-01',
         until: null,
         description:
@@ -24,14 +24,14 @@ export const jobs: ExperienceItem[] = [
         upcoming: true,
     },
     {
-        title: 'Developer',
+        title: 'Developer · Scrum Master',
         company: 'PeterPrint',
         city: 'Groningen',
         image: '/assets/images/peterprint.svg',
         from: '2022-01-01',
         until: '2026-05-31',
         description:
-            'Worked on the Magento 2 webshop and a growing fleet of Symfony microservices, Nuxt storefronts and event-driven integrations. Scalable architecture, NATS messaging, and developer workflows.',
+            'Worked on the Magento 2 webshop and a growing fleet of Symfony microservices, Nuxt storefronts and event-driven integrations. Scalable architecture, NATS messaging, and developer workflows. Also served informally as Scrum Master for the team (not my official title, but the hat I wore most days).',
         type: 'work',
     },
     {

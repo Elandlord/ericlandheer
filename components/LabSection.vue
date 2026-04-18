@@ -213,23 +213,14 @@ const DiagramMempalace: Component = {
 
 const DiagramPixelAgents: Component = {
     render() {
-        const cell = (color: string) => h('div', { class: `h-3 w-3 rounded-sm ${color}` });
-        return h('div', { class: 'rounded-xl border border-white/10 bg-[#5a8a4a] p-3' }, [
-            h('div', { class: 'grid grid-cols-8 gap-1' }, [
-                ...Array.from({ length: 8 }, () => cell('bg-[#6aa05a]')),
-                cell('bg-[#6aa05a]'), cell('bg-amber-300'), cell('bg-amber-300'), cell('bg-[#6aa05a]'),
-                cell('bg-emerald-700'), cell('bg-emerald-700'), cell('bg-[#6aa05a]'), cell('bg-[#6aa05a]'),
-                cell('bg-[#6aa05a]'), cell('bg-amber-500'), cell('bg-amber-500'), cell('bg-[#6aa05a]'),
-                cell('bg-[#6aa05a]'), cell('bg-pink-300'), cell('bg-[#6aa05a]'), cell('bg-emerald-700'),
-                cell('bg-emerald-700'), cell('bg-[#6aa05a]'), cell('bg-[#6aa05a]'), cell('bg-sky-300'),
-                cell('bg-[#6aa05a]'), cell('bg-[#6aa05a]'), cell('bg-yellow-200'), cell('bg-[#6aa05a]'),
-                cell('bg-[#6aa05a]'), cell('bg-[#6aa05a]'), cell('bg-[#6aa05a]'), cell('bg-[#6aa05a]'),
-                cell('bg-emerald-700'), cell('bg-[#6aa05a]'), cell('bg-[#6aa05a]'), cell('bg-[#6aa05a]'),
-            ]),
-            h('div', { class: 'mt-2 flex items-center justify-between font-mono text-[10px] text-white/80' }, [
-                h('span', null, 'Melvin · dev'),
-                h('span', { class: 'italic text-white/60' }, '"overtime again…"'),
-            ]),
+        return h('div', { class: 'overflow-hidden rounded-xl border border-white/10 bg-[#3f6a33] shadow-inner' }, [
+            h('img', {
+                src: '/assets/images/pixel-agents-village.png',
+                alt: 'Pixel Agents village screenshot',
+                class: 'h-56 w-full object-cover',
+                style: 'image-rendering: pixelated;',
+                loading: 'lazy',
+            }),
         ]);
     },
 };
@@ -266,7 +257,7 @@ const items: LabItem[] = [
     {
         title: 'Pixel Agents',
         description:
-            'Stardew-style villages and top-down offices inhabited by LLM-driven NPCs. Each agent has a role, a portrait, a backstory, coordinates, and a job to do. They chop trees, farm code, and complain about the backlog.',
+            'Stardew-style villages and top-down offices inhabited by LLM-driven NPCs. Each agent has a role, a portrait, a backstory, coordinates, and a job to do. They chop trees, farm code, and chat in speech bubbles while they work.',
         icon: 'ph:game-controller-fill',
         iconColor: 'text-emerald-300',
         glow: 'bg-emerald-500/15',
