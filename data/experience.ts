@@ -104,7 +104,7 @@ export const education: ExperienceItem[] = [
         title: 'Agile Scrum Master Training',
         company: 'Agile Scrum Group',
         city: 'Remote',
-        image: null,
+        image: '/assets/images/agile-scrum-group.png',
         from: '2025-05-01',
         until: '2025-05-31',
         description: 'Scrum Master training covering sprint facilitation, backlog refinement, and team coaching.',

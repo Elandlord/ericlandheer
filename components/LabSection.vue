@@ -230,6 +230,59 @@ const DiagramMempalace: Component = {
 
 const DiagramPixelAgents: Component = PixelAgentsDiagram;
 
+const DiagramClaudePlugins: Component = {
+    render() {
+        const chip = (text: string, tone: string) =>
+            h('span', { class: `rounded-md px-2 py-0.5 text-[10px] ring-1 ${tone}` }, text);
+        return h('div', { class: 'rounded-xl border border-white/10 bg-ink-950/60 p-4 font-mono text-[11px]' }, [
+            h('div', { class: 'flex flex-wrap gap-1.5' }, [
+                chip('/review', 'bg-accent/10 text-accent-soft ring-accent/30'),
+                chip('/bug', 'bg-rose-400/10 text-rose-200 ring-rose-400/30'),
+                chip('/zettel', 'bg-violet-400/10 text-violet-200 ring-violet-400/30'),
+                chip('/sprint-review', 'bg-emerald-400/10 text-emerald-200 ring-emerald-400/30'),
+                chip('/interview', 'bg-amber-400/10 text-amber-200 ring-amber-400/30'),
+                chip('/security-review', 'bg-pink-400/10 text-pink-200 ring-pink-400/30'),
+            ]),
+            h('div', { class: 'mt-3 space-y-1 text-slate-400' }, [
+                h('div', null, [
+                    h('span', { class: 'text-slate-600' }, '~/.claude/skills/ '),
+                    h('span', { class: 'text-slate-500' }, '→ '),
+                    h('span', { class: 'text-accent-soft' }, 'skill-codex, mempalace…'),
+                ]),
+                h('div', null, [
+                    h('span', { class: 'text-slate-600' }, 'CLAUDE.md '),
+                    h('span', { class: 'text-slate-500' }, '→ '),
+                    h('span', { class: 'text-accent-soft' }, 'conventions per project'),
+                ]),
+            ]),
+        ]);
+    },
+};
+
+const DiagramPkmGardener: Component = {
+    render() {
+        const node = (label: string, tone: string) =>
+            h('div', { class: `rounded-md px-2 py-1 text-[10px] font-mono ring-1 ${tone}` }, label);
+        return h('div', { class: 'rounded-xl border border-white/10 bg-ink-950/60 p-4' }, [
+            h('div', { class: 'flex items-center justify-between gap-2' }, [
+                node('0 Inbox/', 'bg-amber-400/10 text-amber-200 ring-amber-400/30'),
+                h('span', { class: 'text-slate-500' }, '→'),
+                node('seedling', 'bg-emerald-400/10 text-emerald-200 ring-emerald-400/30'),
+                h('span', { class: 'text-slate-500' }, '→'),
+                node('permanent', 'bg-accent/10 text-accent-soft ring-accent/30'),
+            ]),
+            h('div', { class: 'mt-3 flex items-center justify-between text-[10px] font-mono text-slate-500' }, [
+                h('span', { class: 'text-fuchsia-300' }, '🤖 gardener'),
+                h('span', null, 'enrich · tag · link · reindex'),
+            ]),
+            h('div', { class: 'mt-2 font-mono text-[10px] text-slate-400' }, [
+                h('span', { class: 'text-slate-600' }, '$ '),
+                h('span', null, 'garden --promote --dry-run=false'),
+            ]),
+        ]);
+    },
+};
+
 const DiagramClaudeApi: Component = {
     render() {
         return h('div', { class: 'rounded-xl border border-white/10 bg-ink-950/60 p-4 font-mono text-[11px]' }, [
@@ -313,6 +366,28 @@ const items: LabItem[] = [
         span: '',
         tags: ['MCP', 'Knowledge graph'],
         diagram: DiagramMempalace,
+    },
+    {
+        title: 'Claude Code plugins',
+        description:
+            'Custom skills, slash commands and CLAUDE.md conventions that turn Claude Code into a team member. /review, /bug, /zettel, /sprint-review, /security-review, plus a skill-codex wrapper to bring in Codex CLI when it helps.',
+        icon: 'ph:terminal-window-fill',
+        iconColor: 'text-accent',
+        glow: 'bg-cyan-400/15',
+        span: '',
+        tags: ['Claude Code', 'Skills', 'Slash commands'],
+        diagram: DiagramClaudePlugins,
+    },
+    {
+        title: 'PKM Gardener',
+        description:
+            'Autonomous agent that drains 0 Inbox/, promotes fleeting notes into proper Zettels, enriches seedlings with tags and wikilinks, and kicks Local Brain to reindex. The feedback loop that keeps the vault sharp for every other agent.',
+        icon: 'ph:plant-fill',
+        iconColor: 'text-emerald-300',
+        glow: 'bg-emerald-400/15',
+        span: '',
+        tags: ['Agents', 'Obsidian', 'Zettelkasten'],
+        diagram: DiagramPkmGardener,
     },
     {
         title: 'Claude API tinkering',
