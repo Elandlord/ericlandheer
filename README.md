@@ -32,12 +32,19 @@ Career, education, skills and projects are hardcoded in `data/`. Edit and ship.
 
 ## Deploy
 
-Pushes to `main` trigger the GitHub Action at `.github/workflows/deploy.yml`, which deploys to Cloudflare Pages.
+Deployed on **Coolify** (VPS). Coolify watches the `main` branch and rebuilds via the included `Dockerfile` on every push.
 
-Required repo secrets:
+Locally, a production build runs with:
 
-- `CLOUDFLARE_API_TOKEN`
-- `CLOUDFLARE_ACCOUNT_ID`
+```bash
+npm run build
+npm run start        # node .output/server/index.mjs
+```
+
+### Optional env vars
+
+- `GITHUB_TOKEN` — raises `/api/repos` from the 60 req/hr anonymous GitHub rate limit to 5000 req/hr authenticated.
+- `NITRO_PRESET` — override the default `node-server` preset if you ever redeploy to an edge runtime (e.g. `cloudflare-pages`).
 
 ## Glitterplaatje
 
