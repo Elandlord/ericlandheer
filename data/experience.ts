@@ -31,7 +31,7 @@ export const jobs: ExperienceItem[] = [
         from: '2022-01-01',
         until: '2026-05-31',
         description:
-            'Worked on the Magento 2 webshop and a growing fleet of Symfony microservices, Nuxt storefronts and event-driven integrations. Scalable architecture, NATS messaging, and developer workflows. Also served informally as Scrum Master for the team (not my official title, but the hat I wore most days).',
+            'Worked on the Magento 2 webshop and a growing fleet of Symfony microservices, Nuxt storefronts and event-driven integrations. Scalable architecture, NATS messaging, and developer workflows. Also served as Scrum Master for the team, making sure Scrum practices were followed. Main back-end code reviewer.',
         type: 'work',
     },
     {
