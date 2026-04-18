@@ -8,22 +8,5 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount } from 'vue';
-
-let lenis: any = null;
-
-onMounted(async () => {
-    if (typeof window === 'undefined') return;
-    const { default: Lenis } = await import('lenis');
-    lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
-    const raf = (time: number) => {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-    };
-    requestAnimationFrame(raf);
-});
-
-onBeforeUnmount(() => {
-    lenis?.destroy();
-});
+// Smooth scroll + ScrollTrigger wiring lives in plugins/smooth-scroll.client.ts
 </script>
