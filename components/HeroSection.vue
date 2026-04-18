@@ -15,11 +15,11 @@
 
                 <h1 class="mt-6 font-display text-5xl font-black leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
                     Full stack engineer
-                    <span class="text-gradient">building calm,<br />scalable software.</span>
+                    <span class="text-gradient">building pragmatic,<br />scalable software.</span>
                 </h1>
 
                 <p class="mt-6 max-w-xl text-lg leading-relaxed text-slate-300">
-                    I started building for the web at 15 and still enjoy turning complex ideas into reliable experiences. Laravel, Symfony and Vue are my baseline — I also reach for Go, NATS and cloud tooling when a problem asks for it.
+                    I started building for the web at 15 and still enjoy turning complex ideas into reliable experiences. Laravel, Symfony and Vue are my baseline. I also reach for Go, NATS and cloud tooling when a problem asks for it.
                 </p>
 
                 <div class="mt-9 flex flex-wrap items-center gap-3">
@@ -59,18 +59,17 @@
 
             <div class="relative mx-auto w-full max-w-md" ref="cardRef">
                 <div
-                    class="shimmer-border group relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-ink-800 to-ink-900 p-3 shadow-2xl shadow-accent/20"
+                    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_45%,rgba(34,211,238,0.35),transparent_60%)] blur-2xl"
+                />
+                <img
+                    src="/assets/images/eric.png"
+                    alt="Portrait of Eric Landheer"
+                    class="relative h-auto w-full select-none"
                     @mousemove="onTilt"
                     @mouseleave="resetTilt"
                     :style="tiltStyle"
-                >
-                    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.25),transparent_60%)]" />
-                    <img
-                        src="/assets/images/eric.png"
-                        alt="Portrait of Eric Landheer"
-                        class="relative h-full w-full rounded-[1.5rem] object-cover"
-                    />
-                </div>
+                    draggable="false"
+                />
             </div>
         </div>
     </section>

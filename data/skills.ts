@@ -38,7 +38,7 @@ export const skills: Skill[] = [
     },
     {
         name: 'Event-driven systems',
-        blurb: 'NATS, Kafka, RabbitMQ — designing reliable async workflows between services.',
+        blurb: 'NATS, Kafka, RabbitMQ. Designing reliable async workflows between services.',
         icon: 'ph:lightning-bold',
         accent: 'from-violet-400/20 to-fuchsia-400/10',
     },

@@ -3,6 +3,7 @@
         <HeroSection />
         <SkillsSection />
         <ExperienceSection />
+        <LabSection />
         <ProjectsSection />
     </main>
 </template>

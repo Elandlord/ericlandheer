@@ -49,10 +49,10 @@ export const jobs: ExperienceItem[] = [
         title: 'Junior developer',
         company: 'RAPIDE Internet',
         city: 'Groningen',
-        image: '/assets/images/rapide.png',
+        image: '/assets/images/rapide.svg',
         from: '2017-10-01',
         until: '2018-09-01',
-        description: 'First professional steps in web development — PHP, JavaScript, and a lot of learning on the job.',
+        description: 'First professional steps in web development: PHP, JavaScript, and a lot of learning on the job.',
         type: 'work',
     },
     {
@@ -84,5 +84,5 @@ export function formatPeriod(from: string, until: string | null): string {
     const opts: Intl.DateTimeFormatOptions = { month: 'short', year: 'numeric' };
     const start = new Date(from).toLocaleDateString('en-GB', opts);
     const end = until ? new Date(until).toLocaleDateString('en-GB', opts) : 'now';
-    return `${start} — ${end}`;
+    return `${start} → ${end}`;
 }

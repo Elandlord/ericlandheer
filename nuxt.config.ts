@@ -14,7 +14,7 @@ export default defineNuxtConfig({
     app: {
         head: {
             htmlAttrs: { lang: 'en', class: 'dark' },
-            title: 'Eric Landheer — Full stack web developer',
+            title: 'Eric Landheer · Full stack web developer',
             meta: [
                 { charset: 'utf-8' },
                 { name: 'viewport', content: 'width=device-width, initial-scale=1' },
