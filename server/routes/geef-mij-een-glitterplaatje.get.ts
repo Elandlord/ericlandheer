@@ -1,36 +1,27 @@
 const RSS_URL = 'https://www.deelplaatjes.nl/webmasters/rss?i=dagen-vd-week';
 const DAYS_NL = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'];
+const USER_AGENT = 'ericlandheer.nl/2.0 (+https://ericlandheer.nl)';
 
 interface Plaatje {
     naam: string;
-    plaatje_groot_url: string;
-    plaatje_klein_url?: string;
-    categorie?: string;
+    url: string;
+    categorie: string;
 }
 
 function parseItems(xml: string): Plaatje[] {
     const items: Plaatje[] = [];
     const itemRegex = /<item>([\s\S]*?)<\/item>/g;
-    const fieldRegex = (tag: string) => new RegExp(`<${tag}>([\\s\\S]*?)<\\/${tag}>`);
+    const get = (block: string, tag: string) => {
+        const m = block.match(new RegExp(`<${tag}>([\\s\\S]*?)<\\/${tag}>`));
+        return m ? m[1].replace(/<!\[CDATA\[|\]\]>/g, '').trim() : '';
+    };
 
     let match: RegExpExecArray | null;
     while ((match = itemRegex.exec(xml)) !== null) {
         const block = match[1];
-        const get = (tag: string) => {
-            const m = block.match(fieldRegex(tag));
-            return m ? m[1].replace(/<!\[CDATA\[|\]\]>/g, '').trim() : '';
-        };
-
-        const naam = get('naam');
-        const url = get('plaatje_groot_url') || get('plaatje_klein_url');
+        const url = get(block, 'plaatje_groot_url') || get(block, 'plaatje_klein_url');
         if (!url) continue;
-
-        items.push({
-            naam,
-            plaatje_groot_url: url,
-            plaatje_klein_url: get('plaatje_klein_url'),
-            categorie: get('categorie'),
-        });
+        items.push({ naam: get(block, 'naam'), url, categorie: get(block, 'categorie') });
     }
     return items;
 }
@@ -41,11 +32,11 @@ export default defineEventHandler(async (event) => {
     let xml: string;
     try {
         xml = await $fetch<string>(RSS_URL, {
-            headers: { 'User-Agent': 'ericlandheer.nl/2.0 (+https://ericlandheer.nl)' },
+            headers: { 'User-Agent': USER_AGENT },
             responseType: 'text',
             timeout: 8000,
         });
-    } catch (e) {
+    } catch {
         throw createError({ statusCode: 502, statusMessage: 'Upstream feed unreachable' });
     }
 
@@ -54,20 +45,20 @@ export default defineEventHandler(async (event) => {
         throw createError({ statusCode: 502, statusMessage: 'No items in feed' });
     }
 
-    const matching = items.filter((item) => {
-        const haystack = `${item.naam} ${item.categorie ?? ''}`.toLowerCase();
-        return haystack.includes(today);
-    });
-
+    const matching = items.filter((it) => `${it.naam} ${it.categorie}`.toLowerCase().includes(today));
     const pool = matching.length > 0 ? matching : items;
     const pick = pool[Math.floor(Math.random() * pool.length)];
 
+    const imageRes = await fetch(pick.url, { headers: { 'User-Agent': USER_AGENT } });
+    if (!imageRes.ok) {
+        throw createError({ statusCode: 502, statusMessage: 'Image fetch failed' });
+    }
+
+    const contentType = imageRes.headers.get('content-type') ?? 'image/jpeg';
+    const buffer = await imageRes.arrayBuffer();
+
+    setHeader(event, 'Content-Type', contentType);
     setHeader(event, 'Cache-Control', 'public, max-age=300, s-maxage=300');
 
-    return {
-        image: pick.plaatje_groot_url,
-        title: pick.naam || null,
-        day: today,
-        matched: matching.length > 0,
-    };
+    return new Uint8Array(buffer);
 });

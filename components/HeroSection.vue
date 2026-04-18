@@ -10,7 +10,7 @@
                         <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
                         <span class="relative inline-flex h-2 w-2 rounded-full bg-accent" />
                     </span>
-                    Based in Groningen · Available for interesting problems
+                    Based in Groningen · Starting at Simplicate in June 2026
                 </div>
 
                 <h1 class="mt-6 font-display text-5xl font-black leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
@@ -70,17 +70,6 @@
                         alt="Portrait of Eric Landheer"
                         class="relative h-full w-full rounded-[1.5rem] object-cover"
                     />
-                    <div class="pointer-events-none absolute inset-x-3 bottom-3 rounded-2xl bg-ink-950/80 p-4 backdrop-blur-md ring-1 ring-white/10">
-                        <div class="flex items-center justify-between gap-3">
-                            <div>
-                                <p class="font-display text-sm font-semibold text-white">Eric Landheer</p>
-                                <p class="text-xs text-slate-400">Lead developer · PeterPrint</p>
-                            </div>
-                            <span class="rounded-full bg-accent/20 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-accent-soft ring-1 ring-accent/30">
-                                hiring me?
-                            </span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

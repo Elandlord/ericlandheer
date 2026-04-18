@@ -2,23 +2,36 @@ export interface ExperienceItem {
     title: string;
     company: string;
     city: string;
-    image: string;
+    image: string | null;
     from: string;
     until: string | null;
     description: string;
     type: 'work' | 'school';
+    upcoming?: boolean;
 }
 
 export const jobs: ExperienceItem[] = [
     {
-        title: 'Lead developer',
-        company: 'PeterPrint',
+        title: 'Senior Engineer',
+        company: 'Simplicate',
         city: 'Groningen',
-        image: '/assets/images/peterprint.png',
-        from: '2022-01-01',
+        image: null,
+        from: '2026-06-01',
         until: null,
         description:
-            'Leading the platform team on a Magento 2 webshop plus a growing fleet of Symfony microservices, Nuxt storefronts and event-driven integrations. Focus on scalable architecture, NATS messaging, and robust developer workflows.',
+            'Joining the Simplicate engineering team in June 2026 to help build their business software platform for professional services.',
+        type: 'work',
+        upcoming: true,
+    },
+    {
+        title: 'Developer',
+        company: 'PeterPrint',
+        city: 'Groningen',
+        image: '/assets/images/peterprint.svg',
+        from: '2022-01-01',
+        until: '2026-05-31',
+        description:
+            'Worked on the Magento 2 webshop and a growing fleet of Symfony microservices, Nuxt storefronts and event-driven integrations. Scalable architecture, NATS messaging, and developer workflows.',
         type: 'work',
     },
     {
