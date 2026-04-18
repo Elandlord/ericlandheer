@@ -1,10 +1,26 @@
 <template>
     <section id="lab" class="relative py-24">
         <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div class="max-w-2xl" v-reveal>
+            <div class="max-w-3xl" v-reveal>
                 <p class="font-mono text-xs uppercase tracking-[0.3em] text-accent">//&nbsp;Lab</p>
                 <h2 class="mt-3 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">Currently building.</h2>
                 <p class="mt-4 text-slate-300">Side projects that keep me sharp. Mostly about giving large language models something interesting to do.</p>
+            </div>
+
+            <div
+                v-reveal="80"
+                class="mt-8 flex flex-col gap-4 rounded-2xl border border-white/10 bg-gradient-to-br from-accent/5 via-violet-500/5 to-transparent p-6 sm:flex-row sm:items-center"
+            >
+                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-accent to-indigo-500 text-ink-950 shadow-lg shadow-accent/30">
+                    <Icon name="ph:target-bold" class="h-6 w-6" />
+                </div>
+                <div>
+                    <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">North star</p>
+                    <p class="mt-1 font-display text-lg font-semibold text-white">A fully automated agent setup that builds my projects for me.</p>
+                    <p class="mt-1 text-sm leading-relaxed text-slate-300">
+                        Everything below is a piece of the same puzzle: durable memory, a shared task API, tools that navigate my notes, and worlds where agents can collaborate. The end state is a self-driving lab where I brief the agents and they ship.
+                    </p>
+                </div>
             </div>
 
             <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
