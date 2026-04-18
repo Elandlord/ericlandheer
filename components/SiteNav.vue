@@ -4,11 +4,15 @@
         :class="scrolled ? 'backdrop-blur-xl bg-ink-950/60 border-b border-white/5' : ''"
     >
         <nav class="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-            <NuxtLink to="/" class="group flex items-center gap-2 font-display text-lg font-bold tracking-tight">
-                <span class="relative inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-accent to-indigo-500 text-ink-950 shadow-lg shadow-accent/30 transition group-hover:scale-110">
-                    EL
-                </span>
-                <span class="hidden sm:inline text-white">Eric Landheer</span>
+            <NuxtLink
+                to="/"
+                class="group flex items-center font-mono text-base tracking-tight text-white"
+                aria-label="Eric Landheer"
+            >
+                <span class="text-accent transition group-hover:text-accent-soft">~/</span>
+                <span class="font-display text-lg font-bold">eric</span>
+                <span class="hidden font-display text-lg font-bold text-slate-400 sm:inline">.landheer</span>
+                <span class="ml-0.5 inline-block h-4 w-[2px] translate-y-[1px] animate-blink bg-accent" aria-hidden="true" />
             </NuxtLink>
 
             <ul class="flex items-center gap-1 text-sm">

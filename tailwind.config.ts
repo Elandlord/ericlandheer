@@ -29,6 +29,7 @@ export default <Partial<Config>>{
                 'gradient-shift': 'gradient-shift 14s ease infinite',
                 'float': 'float 6s ease-in-out infinite',
                 'shimmer': 'shimmer 2.5s linear infinite',
+                'blink': 'blink 1.1s steps(2, end) infinite',
             },
             keyframes: {
                 'gradient-shift': {
@@ -42,6 +43,10 @@ export default <Partial<Config>>{
                 'shimmer': {
                     '0%': { backgroundPosition: '-200% 0' },
                     '100%': { backgroundPosition: '200% 0' },
+                },
+                'blink': {
+                    '0%, 100%': { opacity: '1' },
+                    '50%': { opacity: '0' },
                 },
             },
         },
