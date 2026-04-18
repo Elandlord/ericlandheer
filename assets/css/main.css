@@ -1,0 +1,75 @@
+@import url('https://fonts.cdnfonts.com/css/space-grotesk');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        color-scheme: dark;
+    }
+
+    html {
+        @apply bg-ink-950 text-slate-200 antialiased;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply font-sans;
+        font-feature-settings: 'ss01', 'cv11';
+    }
+
+    ::selection {
+        @apply bg-accent/30 text-white;
+    }
+}
+
+@layer utilities {
+    .mesh-bg {
+        background:
+            radial-gradient(60% 60% at 20% 10%, rgba(34, 211, 238, 0.22), transparent 60%),
+            radial-gradient(50% 50% at 85% 20%, rgba(99, 102, 241, 0.22), transparent 60%),
+            radial-gradient(55% 55% at 50% 95%, rgba(236, 72, 153, 0.18), transparent 60%),
+            linear-gradient(180deg, #050814, #0a0f1f);
+    }
+
+    .grid-lines {
+        background-image:
+            linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        background-size: 56px 56px;
+    }
+
+    .text-gradient {
+        background: linear-gradient(120deg, #22d3ee 0%, #a78bfa 40%, #f472b6 80%);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: gradient-shift 14s ease infinite;
+    }
+
+    .glass {
+        @apply bg-white/[0.03] backdrop-blur-xl border border-white/10;
+    }
+
+    .shimmer-border {
+        position: relative;
+        isolation: isolate;
+    }
+
+    .shimmer-border::before {
+        content: '';
+        position: absolute;
+        inset: -1px;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(110deg, transparent 30%, rgba(34, 211, 238, 0.6) 50%, transparent 70%);
+        background-size: 200% 100%;
+        -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+        mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        animation: shimmer 3s linear infinite;
+        pointer-events: none;
+    }
+}
