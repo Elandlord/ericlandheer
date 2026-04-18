@@ -73,14 +73,11 @@
                         alt="Portrait of Eric Landheer"
                         class="relative h-auto w-full select-none"
                         draggable="false"
+                        :style="imgStyle"
                     />
                     <div
                         class="pointer-events-none absolute inset-0 mix-blend-soft-light"
                         :style="lightStyle"
-                    />
-                    <div
-                        class="pointer-events-none absolute inset-0 rounded-full"
-                        :style="shadowStyle"
                     />
                 </div>
             </div>
@@ -113,10 +110,16 @@ const portraitStyle = computed(() => ({
 
 const lightStyle = computed(() => ({
     background: `radial-gradient(circle at ${lightX.value}% ${lightY.value}%, rgba(255, 255, 255, 0.22), transparent 55%)`,
+    WebkitMaskImage: 'url(/assets/images/eric.png)',
+    maskImage: 'url(/assets/images/eric.png)',
+    WebkitMaskSize: '100% 100%',
+    maskSize: '100% 100%',
+    WebkitMaskRepeat: 'no-repeat',
+    maskRepeat: 'no-repeat',
 }));
 
-const shadowStyle = computed(() => ({
-    boxShadow: `${-rotY.value * 2}px ${rotX.value * 2 + 20}px 60px -20px rgba(0, 0, 0, 0.6)`,
+const imgStyle = computed(() => ({
+    filter: `drop-shadow(${-rotY.value * 1.4}px ${rotX.value * 1.4 + 18}px 40px rgba(0, 0, 0, 0.55))`,
 }));
 
 const haloStyle = computed(() => ({
