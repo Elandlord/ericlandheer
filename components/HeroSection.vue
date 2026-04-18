@@ -13,10 +13,7 @@
                     Based in Groningen · Starting at Simplicate in June 2026
                 </div>
 
-                <h1
-                    ref="headlineRef"
-                    class="mt-6 font-display text-5xl font-black leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl will-change-transform origin-left"
-                >
+                <h1 class="mt-6 font-display text-5xl font-black leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
                     Full stack engineer
                     <span class="text-gradient">building pragmatic,<br />scalable software.</span>
                 </h1>
@@ -83,7 +80,6 @@ import { ref, onMounted, computed } from 'vue';
 
 const textRef = ref<HTMLElement | null>(null);
 const cardRef = ref<HTMLElement | null>(null);
-const headlineRef = ref<HTMLElement | null>(null);
 
 const tiltX = ref(0);
 const tiltY = ref(0);
@@ -110,31 +106,14 @@ const resetTilt = () => {
 onMounted(async () => {
     if (typeof window === 'undefined') return;
     const { default: gsap } = await import('gsap');
-    const { ScrollTrigger } = await import('gsap/ScrollTrigger');
-    gsap.registerPlugin(ScrollTrigger);
 
     if (textRef.value) {
-        gsap.from(textRef.value.querySelectorAll('p, .inline-flex, dl, a'), {
+        gsap.from(textRef.value.querySelectorAll('h1, p, .inline-flex, dl, a'), {
             y: 24,
             opacity: 0,
             duration: 0.9,
             ease: 'power3.out',
             stagger: 0.08,
-        });
-    }
-    if (headlineRef.value) {
-        gsap.set(headlineRef.value, { scale: 1.22, y: 20, letterSpacing: '-0.01em' });
-        gsap.to(headlineRef.value, {
-            scale: 1,
-            y: 0,
-            letterSpacing: '-0.025em',
-            ease: 'none',
-            scrollTrigger: {
-                trigger: headlineRef.value,
-                start: 'top 70%',
-                end: 'bottom 35%',
-                scrub: 0.6,
-            },
         });
     }
     if (cardRef.value) {
