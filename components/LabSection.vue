@@ -53,6 +53,7 @@
 
 <script setup lang="ts">
 import { h, type Component } from 'vue';
+import PixelAgentsDiagram from '~/components/PixelAgentsDiagram.vue';
 
 interface LabItem {
     title: string;
@@ -211,19 +212,7 @@ const DiagramMempalace: Component = {
     },
 };
 
-const DiagramPixelAgents: Component = {
-    render() {
-        return h('div', { class: 'overflow-hidden rounded-xl border border-white/10 bg-[#3f6a33] shadow-inner' }, [
-            h('img', {
-                src: '/assets/images/pixel-agents-village.png',
-                alt: 'Pixel Agents village screenshot',
-                class: 'h-56 w-full object-cover',
-                style: 'image-rendering: pixelated;',
-                loading: 'lazy',
-            }),
-        ]);
-    },
-};
+const DiagramPixelAgents: Component = PixelAgentsDiagram;
 
 const DiagramClaudeApi: Component = {
     render() {

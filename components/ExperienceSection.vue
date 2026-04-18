@@ -27,7 +27,7 @@
                                     class="rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ring-1"
                                     :class="badgeClass(item)"
                                 >
-                                    {{ item.upcoming ? 'Upcoming' : item.type === 'work' ? 'Work' : 'Education' }}
+                                    {{ badgeLabel(item) }}
                                 </span>
                                 <span class="font-mono text-xs text-slate-500">{{ formatPeriod(item.from, item.until) }}</span>
                             </div>
@@ -59,6 +59,14 @@ const timeline = computed<ExperienceItem[]>(() => {
 function badgeClass(item: ExperienceItem) {
     if (item.upcoming) return 'bg-fuchsia-500/15 text-fuchsia-100 ring-fuchsia-400/40';
     if (item.type === 'work') return 'bg-accent/15 text-accent-soft ring-accent/30';
+    if (item.type === 'certification') return 'bg-amber-400/15 text-amber-200 ring-amber-400/30';
     return 'bg-violet-500/15 text-violet-200 ring-violet-500/30';
+}
+
+function badgeLabel(item: ExperienceItem): string {
+    if (item.upcoming) return 'Upcoming';
+    if (item.type === 'work') return 'Work';
+    if (item.type === 'certification') return 'Certification';
+    return 'Education';
 }
 </script>

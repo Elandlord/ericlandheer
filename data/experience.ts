@@ -6,7 +6,7 @@ export interface ExperienceItem {
     from: string;
     until: string | null;
     description: string;
-    type: 'work' | 'school';
+    type: 'work' | 'school' | 'certification';
     upcoming?: boolean;
 }
 
@@ -46,6 +46,16 @@ export const jobs: ExperienceItem[] = [
         type: 'work',
     },
     {
+        title: 'Back-end developer',
+        company: 'Qlic Internet Solutions B.V.',
+        city: 'Groningen',
+        image: '/assets/images/qlic.png',
+        from: '2021-11-01',
+        until: '2021-11-30',
+        description: 'Short stint writing PHP back-end code. Good people, not the right fit for me at the time.',
+        type: 'work',
+    },
+    {
         title: 'Junior developer',
         company: 'RAPIDE Internet',
         city: 'Groningen',
@@ -77,6 +87,16 @@ export const education: ExperienceItem[] = [
         until: '2020-02-01',
         description: 'Bachelor in ICT, with a focus on software engineering.',
         type: 'school',
+    },
+    {
+        title: 'Laravel Certification',
+        company: 'Laravel LLC',
+        city: 'Arkansas City',
+        image: '/assets/images/laravel.png',
+        from: '2021-11-01',
+        until: '2021-11-30',
+        description: 'Official Laravel Certification issued by Laravel LLC.',
+        type: 'certification',
     },
 ];
 
