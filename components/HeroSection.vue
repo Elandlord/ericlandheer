@@ -60,53 +60,102 @@
             <div class="relative mx-auto w-full max-w-md" ref="cardRef">
                 <div
                     class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_45%,rgba(34,211,238,0.35),transparent_60%)] blur-2xl"
+                    :style="haloStyle"
                 />
-                <img
-                    src="/assets/images/eric.png"
-                    alt="Portrait of Eric Landheer"
-                    class="relative h-auto w-full select-none"
-                    @mousemove="onTilt"
-                    @mouseleave="resetTilt"
-                    :style="tiltStyle"
-                    draggable="false"
-                />
+                <div
+                    ref="portraitRef"
+                    class="relative will-change-transform"
+                    style="transform-style: preserve-3d"
+                    :style="portraitStyle"
+                >
+                    <img
+                        src="/assets/images/eric.png"
+                        alt="Portrait of Eric Landheer"
+                        class="relative h-auto w-full select-none"
+                        draggable="false"
+                    />
+                    <div
+                        class="pointer-events-none absolute inset-0 mix-blend-soft-light"
+                        :style="lightStyle"
+                    />
+                    <div
+                        class="pointer-events-none absolute inset-0 rounded-full"
+                        :style="shadowStyle"
+                    />
+                </div>
             </div>
         </div>
     </section>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
 
 const textRef = ref<HTMLElement | null>(null);
 const cardRef = ref<HTMLElement | null>(null);
+const portraitRef = ref<HTMLElement | null>(null);
 
-const tiltX = ref(0);
-const tiltY = ref(0);
+const rotX = ref(0);
+const rotY = ref(0);
+const lightX = ref(50);
+const lightY = ref(50);
 
-const tiltStyle = computed(() => ({
-    transform: `perspective(1000px) rotateX(${tiltY.value}deg) rotateY(${tiltX.value}deg)`,
-    transition: 'transform 0.2s ease-out',
+let targetRotX = 0;
+let targetRotY = 0;
+let targetLightX = 50;
+let targetLightY = 50;
+let rafId: number | null = null;
+let removeListener: (() => void) | null = null;
+
+const portraitStyle = computed(() => ({
+    transform: `perspective(1200px) rotateX(${rotX.value}deg) rotateY(${rotY.value}deg)`,
 }));
 
-const onTilt = (e: MouseEvent) => {
-    const el = e.currentTarget as HTMLElement;
-    const rect = el.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    tiltX.value = x * 12;
-    tiltY.value = -y * 12;
-};
+const lightStyle = computed(() => ({
+    background: `radial-gradient(circle at ${lightX.value}% ${lightY.value}%, rgba(255, 255, 255, 0.22), transparent 55%)`,
+}));
 
-const resetTilt = () => {
-    tiltX.value = 0;
-    tiltY.value = 0;
+const shadowStyle = computed(() => ({
+    boxShadow: `${-rotY.value * 2}px ${rotX.value * 2 + 20}px 60px -20px rgba(0, 0, 0, 0.6)`,
+}));
+
+const haloStyle = computed(() => ({
+    transform: `translate(${rotY.value * 1.2}px, ${-rotX.value * 1.2}px)`,
+    transition: 'transform 0.3s ease-out',
+}));
+
+const clamp = (v: number, min: number, max: number) => Math.max(min, Math.min(max, v));
+const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+
+const tick = () => {
+    rotX.value = lerp(rotX.value, targetRotX, 0.08);
+    rotY.value = lerp(rotY.value, targetRotY, 0.08);
+    lightX.value = lerp(lightX.value, targetLightX, 0.12);
+    lightY.value = lerp(lightY.value, targetLightY, 0.12);
+    rafId = requestAnimationFrame(tick);
 };
 
 onMounted(async () => {
     if (typeof window === 'undefined') return;
-    const { default: gsap } = await import('gsap');
 
+    const handleMove = (e: MouseEvent) => {
+        if (!portraitRef.value) return;
+        const rect = portraitRef.value.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = clamp((e.clientX - cx) / (window.innerWidth / 2), -1, 1);
+        const dy = clamp((e.clientY - cy) / (window.innerHeight / 2), -1, 1);
+        targetRotY = dx * 16;
+        targetRotX = -dy * 11;
+        targetLightX = clamp(((e.clientX - rect.left) / rect.width) * 100, -20, 120);
+        targetLightY = clamp(((e.clientY - rect.top) / rect.height) * 100, -20, 120);
+    };
+
+    window.addEventListener('mousemove', handleMove, { passive: true });
+    removeListener = () => window.removeEventListener('mousemove', handleMove);
+    rafId = requestAnimationFrame(tick);
+
+    const { default: gsap } = await import('gsap');
     if (textRef.value) {
         gsap.from(textRef.value.querySelectorAll('h1, p, .inline-flex, dl, a'), {
             y: 24,
@@ -125,5 +174,10 @@ onMounted(async () => {
             delay: 0.2,
         });
     }
+});
+
+onBeforeUnmount(() => {
+    removeListener?.();
+    if (rafId !== null) cancelAnimationFrame(rafId);
 });
 </script>
