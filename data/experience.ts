@@ -35,14 +35,14 @@ export const jobs: ExperienceItem[] = [
         type: 'work',
     },
     {
-        title: 'Full stack developer',
+        title: 'Founder · Full stack developer',
         company: 'MEN Technology & Media',
         city: 'Groningen',
         image: '/assets/images/men.png',
         from: '2014-01-01',
         until: '2021-12-31',
         description:
-            'Built and shipped Laravel + Vue applications for a wide range of clients. Grew from junior into a senior role leading technical delivery and mentoring.',
+            'My own company. Designed, built and shipped Laravel + Vue web applications for a wide range of clients. Ran everything end to end: discovery, architecture, delivery, hosting and client relationships.',
         type: 'work',
     },
     {
