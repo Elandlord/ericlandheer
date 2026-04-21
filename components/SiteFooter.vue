@@ -1,28 +1,22 @@
 <template>
-    <footer class="relative z-10 mt-24 border-t border-white/5">
-        <div class="mx-auto flex w-full max-w-6xl flex-col items-start justify-between gap-6 px-4 py-10 sm:flex-row sm:items-center sm:px-6 lg:px-8">
-            <div class="font-mono text-xs uppercase tracking-[0.3em] text-slate-500">
-                © {{ year }} · Eric Landheer · Groningen
+    <footer
+        class="max-w-[1200px] mx-auto relative z-[2] border-t border-line"
+        style="margin: 110px auto 40px; padding: 28px 24px 0"
+    >
+        <div
+            class="font-mono-chrome text-dim flex justify-between gap-5 flex-wrap"
+            style="font-size: 12px"
+        >
+            <div>
+                <span class="text-cyan">eric.landheer</span>
+                <span> © {{ year }} · Groningen, NL</span>
             </div>
-            <div class="flex items-center gap-3">
-                <a
-                    href="https://github.com/Elandlord"
-                    target="_blank"
-                    rel="noreferrer"
-                    class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-slate-300 transition hover:bg-white/10 hover:text-white"
-                    aria-label="GitHub"
-                >
-                    <Icon name="mdi:github" class="h-4 w-4" />
-                </a>
-                <a
-                    href="/geef-mij-een-glitterplaatje"
-                    target="_blank"
-                    rel="noreferrer"
-                    class="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-pink-500/20 to-fuchsia-500/20 px-3 py-1.5 text-xs font-medium text-pink-100 ring-1 ring-pink-400/30 transition hover:from-pink-500/30 hover:to-fuchsia-500/30"
-                >
-                    <Icon name="ph:sparkle-fill" class="h-3.5 w-3.5" />
-                    Glitterplaatje
-                </a>
+            <div class="flex gap-4">
+                <span>no trackers</span>
+                <span>·</span>
+                <span>no cookies</span>
+                <span>·</span>
+                <span>built with <span class="text-pink">&lt;3</span> + <span class="text-cyan">nuxt</span></span>
             </div>
         </div>
     </footer>

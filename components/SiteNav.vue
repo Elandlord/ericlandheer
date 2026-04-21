@@ -1,61 +1,69 @@
 <template>
-    <header
-        class="fixed inset-x-0 top-0 z-40 transition-all duration-300"
-        :class="scrolled ? 'backdrop-blur-xl bg-ink-950/60 border-b border-white/5' : ''"
+    <nav
+        class="sticky top-0 z-50 transition-colors"
+        :class="scrolled ? 'border-b border-line' : 'border-b border-transparent'"
+        :style="scrolled
+            ? { background: 'rgba(5,8,20,0.82)', backdropFilter: 'blur(14px) saturate(1.3)', WebkitBackdropFilter: 'blur(14px) saturate(1.3)' }
+            : undefined"
     >
-        <nav class="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-            <NuxtLink
-                to="/"
-                class="group flex items-center font-mono text-base tracking-tight text-white"
-                aria-label="Eric Landheer"
-            >
-                <span class="text-accent transition group-hover:text-accent-soft">~/</span>
-                <span class="font-display text-lg font-bold">eric</span>
-                <span class="hidden font-display text-lg font-bold text-slate-400 sm:inline">.landheer</span>
-                <span class="ml-0.5 inline-block h-4 w-[2px] translate-y-[1px] animate-blink bg-accent" aria-hidden="true" />
-            </NuxtLink>
-
-            <ul class="flex items-center gap-1 text-sm">
-                <li v-for="link in links" :key="link.href">
-                    <a
-                        :href="link.href"
-                        class="rounded-full px-3 py-1.5 text-slate-300 transition hover:bg-white/5 hover:text-white"
-                    >
-                        {{ link.label }}
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="https://github.com/Elandlord"
-                        target="_blank"
-                        rel="noreferrer"
-                        class="ml-2 inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1.5 text-slate-200 ring-1 ring-white/10 transition hover:bg-white/10 hover:text-white"
-                    >
-                        <Icon name="mdi:github" class="h-4 w-4" />
-                        GitHub
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+        <div class="max-w-[1200px] mx-auto px-6 py-[14px] flex items-center gap-6 font-mono-chrome text-[13px]">
+            <a href="#top" class="text-head no-underline flex items-center gap-2">
+                <TrafficLights />
+                <span class="text-cyan">~</span>
+                <span class="text-dim">/</span>
+                <span>eric</span>
+                <span class="text-dim">.</span>
+                <span class="text-violet">landheer</span>
+                <span class="ml-[6px] text-pink" style="animation: blink 1.1s infinite">▋</span>
+            </a>
+            <div class="flex gap-1 ml-auto flex-wrap items-center">
+                <a
+                    v-for="s in SECTIONS"
+                    :key="s.id"
+                    :href="`#${s.id}`"
+                    class="px-3 py-[6px] no-underline transition-all border"
+                    :class="active === s.id ? 'text-head border-line' : 'text-dim border-transparent'"
+                    :style="active === s.id ? { background: 'rgba(34,211,238,0.08)' } : undefined"
+                >
+                    <span :class="active === s.id ? 'text-pink' : 'text-dim'">$ </span>{{ s.label }}
+                </a>
+                <a
+                    href="https://github.com/Elandlord"
+                    target="_blank"
+                    rel="noopener"
+                    class="px-3 py-[6px] no-underline text-head border border-line ml-2 flex items-center gap-[6px]"
+                    style="background: linear-gradient(90deg, #22d3ee22, #a78bfa22, #f472b622)"
+                >
+                    <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2 .37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                    </svg>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </nav>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { SECTIONS } from '~/data/site';
 
 const scrolled = ref(false);
-const links = [
-    { href: '#about', label: 'About' },
-    { href: '#skills', label: 'Skills' },
-    { href: '#experience', label: 'Experience' },
-    { href: '#lab', label: 'Lab' },
-    { href: '#projects', label: 'Projects' },
-];
+const active = ref('about');
 
-const onScroll = () => {
-    scrolled.value = window.scrollY > 24;
-};
+function onScroll() {
+    scrolled.value = window.scrollY > 60;
+    let cur = 'about';
+    for (const s of SECTIONS) {
+        const el = document.getElementById(s.id);
+        if (el && el.getBoundingClientRect().top < 140) cur = s.id;
+    }
+    active.value = cur;
+}
 
-onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }));
+onMounted(() => {
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+});
 onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
 </script>
