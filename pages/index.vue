@@ -3,6 +3,8 @@
         <SiteNav />
         <main>
             <Hero />
+            <StatsStrip />
+            <HeroTicker />
             <MiniTerminal />
             <About />
             <Skills />

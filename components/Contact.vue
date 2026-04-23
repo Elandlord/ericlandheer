@@ -15,7 +15,7 @@
                             style="margin:0 0 16px;font-size:clamp(34px, 4.5vw, 56px);letter-spacing:-1px;line-height:1.05"
                         >
                             Like what you see?
-                            <span class="text-gradient-accent">Let's talk.</span>
+                            <span class="text-gradient-shift" style="padding-bottom: 0.08em; display: inline-block">Let's talk.</span>
                         </h2>
                         <p
                             class="text-text"

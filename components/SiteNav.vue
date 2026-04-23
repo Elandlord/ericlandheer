@@ -6,7 +6,7 @@
             ? { background: 'rgba(5,8,20,0.82)', backdropFilter: 'blur(14px) saturate(1.3)', WebkitBackdropFilter: 'blur(14px) saturate(1.3)' }
             : undefined"
     >
-        <div class="max-w-[1200px] mx-auto px-6 py-[14px] flex items-center gap-6 font-mono-chrome text-[13px]">
+        <div class="max-w-[1200px] mx-auto px-6 py-[14px] flex items-center gap-4 font-mono-chrome text-[13px]">
             <a href="#top" class="text-head no-underline flex items-center gap-2">
                 <TrafficLights />
                 <span class="text-cyan">~</span>
@@ -16,6 +16,19 @@
                 <span class="text-violet">landheer</span>
                 <span class="ml-[6px] text-pink" style="animation: blink 1.1s infinite">▋</span>
             </a>
+            <span
+                class="inline-flex items-center gap-2 rounded-full border border-line font-mono-chrome"
+                style="font-size: 11px; padding: 5px 11px; background: rgba(255,255,255,0.03); color: #cbd5e1"
+            >
+                <span
+                    class="rounded-full"
+                    style="width: 7px; height: 7px; background: #a3e635; box-shadow: 0 0 10px #a3e635; animation: dot-pulse 2.2s ease-in-out infinite"
+                />
+                available for coffee
+            </span>
+            <div class="hidden md:block ml-2">
+                <LiveClock />
+            </div>
             <div class="flex gap-1 ml-auto flex-wrap items-center">
                 <a
                     v-for="s in SECTIONS"

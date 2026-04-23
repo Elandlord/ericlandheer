@@ -23,7 +23,7 @@
                         style="margin: 24px 0 14px; font-size: clamp(44px, 6.2vw, 84px); line-height: 0.98; letter-spacing: -1.5px"
                     >
                         Full stack engineer<br />
-                        <span class="text-gradient-accent">building pragmatic,<br />scalable software.</span>
+                        <span class="text-gradient-shift" style="padding-bottom: 0.08em; display: inline-block">building pragmatic,<br />scalable software.</span>
                     </h1>
                     <p
                         class="text-text"
@@ -65,6 +65,7 @@
                         class="relative p-[22px] border border-line"
                         style="background: rgba(10,15,31,0.8); box-shadow: 0 30px 80px -20px rgba(34,211,238,0.25), inset 0 1px 0 rgba(255,255,255,0.04)"
                     >
+                        <Corners color="#22d3ee" />
                         <div
                             class="flex items-center gap-[10px] font-mono-chrome text-[11px] text-dim"
                             style="margin-bottom: 14px"
