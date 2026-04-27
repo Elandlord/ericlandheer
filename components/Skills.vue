@@ -8,84 +8,12 @@
                     style="padding: 26px 30px; font-size: 13px; line-height: 1.8; background: rgba(3,6,17,0.3); min-height: 480px"
                 >
                     <Transition name="tab-swap" mode="out-in">
-                    <div :key="cur.name">
-                    <div class="text-dim">
-                        <span class="text-dim">1</span>
-                        <span style="color: #7c7c7c">// {{ fileFor(cur) }}</span>
-                    </div>
-                    <div>
-                        <span class="text-dim">2</span>
-                        <span class="text-pink">import</span>
-                        <span class="text-cyan">{ Engineer }</span>
-                        <span class="text-pink">from</span>
-                        <span class="text-lime">'../core'</span>;
-                    </div>
-                    <div><span class="text-dim">3</span></div>
-                    <div>
-                        <span class="text-dim">4</span>
-                        <span class="text-pink">export const</span>
-                        <span class="text-amber">{{ cur.name.toLowerCase().replace(/[^a-z0-9]/g, '') }}</span>
-                        <span class="text-head">=</span>
-                        <span class="text-cyan">{</span>
-                    </div>
-                    <div>
-                        <span class="text-dim">5</span>
-                        <span class="text-violet">name</span>:
-                        <span class="text-lime">"{{ cur.name }}"</span>,
-                    </div>
-                    <div>
-                        <span class="text-dim">6</span>
-                        <span class="text-violet">domain</span>:
-                        <span class="text-lime">"{{ cur.tag }}"</span>,
-                    </div>
-                    <div>
-                        <span class="text-dim">7</span>
-                        <span class="text-violet">confidence</span>:
-                        <span class="text-amber">"{{ confidence }}"</span>,
-                    </div>
-                    <div>
-                        <span class="text-dim">8</span>
-                        <span class="text-violet">blurb</span>:
-                        <span class="text-lime">`</span>
-                    </div>
-                    <div
-                        class="font-sans text-text"
-                        :style="{
-                            paddingLeft: '40px',
-                            fontSize: '15px',
-                            lineHeight: '1.65',
-                            margin: '8px 0 8px 12px',
-                            borderLeft: `2px solid ${curColor}55`,
-                            paddingRight: '16px',
-                        }"
-                    >
-                        {{ cur.blurb }}
-                    </div>
-                    <div>
-                        <span class="text-dim">{{ SKILLS.length + 8 }}</span>
-                        <span class="text-lime">`</span>,
-                    </div>
-                    <div>
-                        <span class="text-dim">{{ SKILLS.length + 9 }}</span>
-                        <span class="text-violet">pairs_with</span>: [
-                        <template v-for="(s, i) in pairs" :key="s.name">
-                            <button
-                                type="button"
-                                class="font-mono-chrome cursor-pointer border-0 bg-transparent p-0"
-                                :style="{ fontSize: '13px', color: curColor, textDecoration: 'underline dotted' }"
-                                @click="active = s.name"
-                            >
-                                "{{ s.name }}"
-                            </button>
-                            <span v-if="i < pairs.length - 1">, </span>
-                        </template>
-                        ],
-                    </div>
-                    <div>
-                        <span class="text-dim">{{ SKILLS.length + 10 }}</span>
-                        <span class="text-cyan">}</span>;
-                    </div>
-                    </div>
+                        <pre
+                            :key="cur.name"
+                            class="font-mono-chrome text-text"
+                            style="margin: 0; padding: 0; white-space: pre; overflow-x: auto; font-size: 13px; line-height: 1.8; background: none; border: none;"
+                            v-text="cur.code"
+                        ></pre>
                     </Transition>
                     <div
                         class="flex flex-wrap gap-[6px]"
@@ -128,8 +56,11 @@ const SKILL_COLORS: Record<Skill['tag'], { dot: string }> = {
 
 const active = ref(SKILLS[0].name);
 
-const ext = (t: Skill['tag']) => (t === 'backend' ? '.php' : t === 'frontend' ? '.vue' : '.yml');
-const fileFor = (s: Skill) => s.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') + ext(s.tag);
+const fileFor = (s: Skill): string => {
+    if (s.lang === 'docker') return 'Dockerfile';
+    const exts: Record<string, string> = { php: '.php', vue: '.vue', html: '.html', go: '.go', yaml: '.yml' };
+    return s.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') + (exts[s.lang] ?? '.txt');
+};
 
 const byTag = computed(() => {
     const b: Record<Skill['tag'], Skill[]> = { backend: [], frontend: [], infra: [] };
@@ -148,12 +79,6 @@ const tabs = computed(() =>
 );
 
 const cur = computed(() => SKILLS.find((s) => s.name === active.value) || SKILLS[0]);
-const curColor = computed(() => SKILL_COLORS[cur.value.tag].dot);
-const confidence = computed(() => {
-    const arr = ['high', 'high', 'solid', 'reaching', 'solid', 'high', 'high', 'reaching', 'high'];
-    return arr[SKILLS.indexOf(cur.value) % 9] === 'high' ? 'high' : 'solid';
-});
-const pairs = computed(() => SKILLS.filter((s) => s.tag === cur.value.tag && s.name !== cur.value.name).slice(0, 3));
 </script>
 
 <style scoped>

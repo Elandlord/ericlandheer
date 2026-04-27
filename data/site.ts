@@ -17,6 +17,8 @@ export interface Skill {
     name: string;
     blurb: string;
     tag: 'backend' | 'frontend' | 'infra';
+    lang: string;
+    code: string;
 }
 
 export interface LabProject {
@@ -146,12 +148,172 @@ export const TIMELINE: Job[] = [...JOBS, ...EDUCATION].sort((a, b) => {
 });
 
 export const SKILLS: Skill[] = [
-    { name: 'Laravel & Symfony', blurb: 'Production APIs, robust domain logic, maintainable service architecture.', tag: 'backend' },
-    { name: 'Vue & Nuxt', blurb: 'Interactive interfaces with clear state management and component-driven structure.', tag: 'frontend' },
-    { name: 'Tailwind CSS', blurb: 'Fast UI iteration with consistent spacing, hierarchy, responsive behaviour.', tag: 'frontend' },
-    { name: 'Docker & Kubernetes', blurb: 'Predictable local and CI environments across services and platforms.', tag: 'infra' },
-    { name: 'Go', blurb: 'Lightweight services and tooling where simplicity and performance matter.', tag: 'backend' },
-    { name: 'Event-driven systems', blurb: 'NATS, Kafka, RabbitMQ. Reliable async workflows between services.', tag: 'infra' },
+    {
+        name: 'Laravel & Symfony',
+        blurb: 'Production APIs, robust domain logic, maintainable service architecture.',
+        tag: 'backend',
+        lang: 'php',
+        code: `<?php declare(strict_types=1);
+
+namespace App\\Http\\Controllers;
+
+use App\\Models\\Order;
+use App\\Services\\InvoiceService;
+use Illuminate\\Http\\JsonResponse;
+
+final class OrderController extends Controller
+{
+    public function __construct(
+        private readonly InvoiceService $invoices,
+    ) {}
+
+    public function show(Order $order): JsonResponse
+    {
+        $invoice = $this->invoices->generate($order);
+
+        return response()->json([
+            'order'   => $order,
+            'invoice' => $invoice,
+        ]);
+    }
+}`,
+    },
+    {
+        name: 'Vue & Nuxt',
+        blurb: 'Interactive interfaces with clear state management and component-driven structure.',
+        tag: 'frontend',
+        lang: 'vue',
+        code: `<script setup lang="ts">
+import { ref, computed } from 'vue';
+
+interface Props {
+    title: string;
+    items: string[];
+}
+
+const { title, items } = defineProps<Props>();
+const search = ref('');
+
+const filtered = computed(() =>
+    items.filter(i => i.includes(search.value)),
+);
+</script>
+
+<template>
+    <section>
+        <h2>{{ title }}</h2>
+        <input v-model="search" placeholder="Filter..." />
+        <ul>
+            <li v-for="item in filtered" :key="item">
+                {{ item }}
+            </li>
+        </ul>
+    </section>
+</template>`,
+    },
+    {
+        name: 'Tailwind CSS',
+        blurb: 'Fast UI iteration with consistent spacing, hierarchy, responsive behaviour.',
+        tag: 'frontend',
+        lang: 'html',
+        code: `<div class="flex min-h-screen items-center justify-center bg-gray-950">
+    <article class="max-w-md rounded-2xl border border-white/10
+                    bg-white/5 p-8 shadow-xl backdrop-blur">
+        <span class="text-xs font-semibold uppercase tracking-widest
+                     text-pink-400">
+            Featured
+        </span>
+        <h2 class="mt-2 text-2xl font-bold text-white">
+            Card title
+        </h2>
+        <p class="mt-3 text-sm leading-relaxed text-gray-400">
+            Clean hierarchy, consistent spacing, responsive by default.
+        </p>
+        <button class="mt-6 rounded-lg bg-cyan-500 px-4 py-2
+                       text-sm font-medium text-gray-950
+                       transition hover:bg-cyan-400">
+            Get started
+        </button>
+    </article>
+</div>`,
+    },
+    {
+        name: 'Docker & Kubernetes',
+        blurb: 'Predictable local and CI environments across services and platforms.',
+        tag: 'infra',
+        lang: 'docker',
+        code: `FROM node:22-alpine AS base
+WORKDIR /app
+
+FROM base AS deps
+COPY package*.json ./
+RUN npm ci --omit=dev
+
+FROM base AS builder
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+FROM base AS runner
+ENV NODE_ENV=production
+COPY --from=deps    /app/node_modules ./node_modules
+COPY --from=builder /app/.output      ./.output
+EXPOSE 3000
+CMD ["node", ".output/server/index.mjs"]`,
+    },
+    {
+        name: 'Go',
+        blurb: 'Lightweight services and tooling where simplicity and performance matter.',
+        tag: 'backend',
+        lang: 'go',
+        code: `package main
+
+import (
+    "encoding/json"
+    "log"
+    "net/http"
+)
+
+type HealthResponse struct {
+    Status string \`json:"status"\`
+}
+
+func healthHandler(w http.ResponseWriter, r *http.Request) {
+    w.Header().Set("Content-Type", "application/json")
+    json.NewEncoder(w).Encode(HealthResponse{Status: "ok"})
+}
+
+func main() {
+    http.HandleFunc("/health", healthHandler)
+    log.Fatal(http.ListenAndServe(":8080", nil))
+}`,
+    },
+    {
+        name: 'Event-driven systems',
+        blurb: 'NATS, Kafka, RabbitMQ. Reliable async workflows between services.',
+        tag: 'infra',
+        lang: 'yaml',
+        code: `# NATS JetStream consumer
+consumers:
+  - name: order-processor
+    stream: ORDERS
+    durable: order-processor
+    deliver_policy: all
+    ack_policy: explicit
+    max_deliver: 5
+    ack_wait: 30s
+    filter_subject: orders.created
+
+streams:
+  - name: ORDERS
+    subjects:
+      - orders.>
+    retention: limits
+    max_age: 72h
+    storage: file
+    num_replicas: 3`,
+    },
 ];
 
 export const LAB: LabProject[] = [
