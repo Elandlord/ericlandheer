@@ -16,16 +16,6 @@
                 <span class="text-violet">landheer</span>
                 <span class="ml-[6px] text-pink" style="animation: blink 1.1s infinite">▋</span>
             </a>
-            <span
-                class="inline-flex items-center gap-2 rounded-full border border-line font-mono-chrome"
-                style="font-size: 11px; padding: 5px 11px; background: rgba(255,255,255,0.03); color: #cbd5e1"
-            >
-                <span
-                    class="rounded-full"
-                    style="width: 7px; height: 7px; background: #a3e635; box-shadow: 0 0 10px #a3e635; animation: dot-pulse 2.2s ease-in-out infinite"
-                />
-                available for coffee
-            </span>
             <div class="hidden md:block ml-2">
                 <LiveClock />
             </div>

@@ -7,7 +7,7 @@
                     class="text-text"
                     style="margin:0 0 22px;font-size:15px;line-height:1.7;max-width:680px"
                 >
-                    Packages I maintain or contributed heavily to. Small, focused, used in production at PeterPrint and a handful of other places.
+                    Packages I maintain or contributed heavily to. Small, focused, used in production in a handful of places.
                 </p>
                 <div class="grid gap-4" style="grid-template-columns: 1fr 1fr">
                     <a
