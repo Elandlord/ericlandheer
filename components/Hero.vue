@@ -1,9 +1,8 @@
 <template>
-    <header id="top" class="relative z-[2] pt-12 pb-7">
-        <div class="max-w-[1200px] mx-auto px-6">
+    <header id="top" class="relative z-[2] pt-8 md:pt-12 pb-7">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-6">
             <div
-                class="reveal grid items-center"
-                style="grid-template-columns: 1.15fr 1fr; gap: 56px"
+                class="reveal grid items-center grid-cols-1 md:grid-cols-[1.15fr_1fr] gap-10 md:gap-14"
             >
                 <div>
                     <div
@@ -20,7 +19,7 @@
                     </div>
                     <h1
                         class="font-sans font-bold text-head"
-                        style="margin: 24px 0 14px; font-size: clamp(44px, 6.2vw, 84px); line-height: 0.98; letter-spacing: -1.5px"
+                        style="margin: 24px 0 14px; font-size: clamp(38px, 8vw, 84px); line-height: 1; letter-spacing: -1.5px"
                     >
                         Full stack engineer<br />
                         <span class="text-gradient-shift" style="padding-bottom: 0.08em; display: inline-block">building pragmatic,<br />scalable software.</span>
@@ -62,7 +61,7 @@
                 </div>
                 <div class="flex justify-center relative">
                     <div
-                        class="relative p-[22px] border border-line"
+                        class="relative p-[14px] md:p-[22px] border border-line w-full md:w-auto"
                         style="background: rgba(10,15,31,0.8); box-shadow: 0 30px 80px -20px rgba(34,211,238,0.25), inset 0 1px 0 rgba(255,255,255,0.04)"
                     >
                         <Corners color="#22d3ee" />

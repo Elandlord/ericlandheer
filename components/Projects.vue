@@ -1,5 +1,5 @@
 <template>
-    <div id="projects" class="max-w-[1200px] mx-auto px-6 relative z-[2]" style="margin-top: 100px">
+    <div id="projects" class="max-w-[1200px] mx-auto px-4 md:px-6 relative z-[2]" style="margin-top: 100px">
         <div class="reveal">
             <SectionIntro id="projects" kicker="open source, in production" title="In the wild." />
             <RepoCardsFrame>
@@ -9,7 +9,7 @@
                 >
                     Packages I maintain or contributed heavily to. Small, focused, used in production in a handful of places.
                 </p>
-                <div class="grid gap-4" style="grid-template-columns: 1fr 1fr">
+                <div class="grid gap-4 grid-cols-1 md:grid-cols-2">
                     <a
                         v-for="p in PACKAGES"
                         :key="p.name"

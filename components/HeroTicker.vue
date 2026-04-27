@@ -1,5 +1,5 @@
 <template>
-    <section class="max-w-[1200px] mx-auto px-6 relative z-[2]" style="margin-top: 24px">
+    <section class="max-w-[1200px] mx-auto px-4 md:px-6 relative z-[2]" style="margin-top: 24px">
         <div class="border border-line" style="background: rgba(3,6,17,0.55)">
             <Ticker :items="items" />
         </div>

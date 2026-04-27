@@ -14,14 +14,14 @@
             <span class="px-[14px] py-[6px]" style="color: #475569">[No Name]</span>
             <span class="ml-auto px-[14px] py-[6px]" style="color: #7d8590">~/.vimrc</span>
         </div>
-        <div style="display:grid;grid-template-columns:42px 1fr;min-height:360px">
+        <div class="grid grid-cols-[28px_1fr] md:grid-cols-[42px_1fr]" style="min-height:360px">
             <div
-                class="font-mono-chrome text-[12px]"
-                style="color:#475569;padding:18px 8px 18px 0;text-align:right;line-height:1.7;background:rgba(3,6,17,0.4)"
+                class="font-mono-chrome text-[11px] md:text-[12px]"
+                style="color:#475569;padding:18px 6px 18px 0;text-align:right;line-height:1.7;background:rgba(3,6,17,0.4)"
             >
                 <div v-for="i in 18" :key="i">{{ i }}</div>
             </div>
-            <div class="relative" style="padding: 18px 22px">
+            <div class="relative px-4 py-4 md:px-[22px] md:py-[18px]">
                 <slot />
             </div>
         </div>

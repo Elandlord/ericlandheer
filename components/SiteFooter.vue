@@ -1,7 +1,7 @@
 <template>
     <footer
-        class="max-w-[1200px] mx-auto relative z-[2] border-t border-line"
-        style="margin: 110px auto 40px; padding: 28px 24px 0"
+        class="max-w-[1200px] mx-auto relative z-[2] border-t border-line px-4 md:px-6 pt-7"
+        style="margin: 110px auto 40px"
     >
         <div
             class="font-mono-chrome text-dim flex justify-between gap-5 flex-wrap"

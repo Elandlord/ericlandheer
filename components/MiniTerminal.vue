@@ -1,15 +1,15 @@
 <template>
-    <div class="max-w-[1200px] mx-auto mt-10 px-6 relative z-[2]">
+    <div class="max-w-[1200px] mx-auto mt-10 px-4 md:px-6 relative z-[2]">
         <div
             class="reveal border border-line"
             style="background: rgba(3,6,17,0.85); box-shadow: 0 20px 60px -25px rgba(0,0,0,0.8)"
         >
-            <div class="px-[14px] py-[10px] border-b border-line flex items-center gap-[14px] font-mono-chrome text-[12px]">
+            <div class="px-[12px] md:px-[14px] py-[10px] border-b border-line flex items-center gap-3 md:gap-[14px] font-mono-chrome text-[11px] md:text-[12px] overflow-hidden">
                 <TrafficLights />
-                <span class="text-dim">
-                    zsh · <span class="text-cyan">~/eric.landheer</span> · any section name jumps the page
+                <span class="text-dim truncate">
+                    zsh · <span class="text-cyan">~/eric.landheer</span><span class="hidden sm:inline"> · any section name jumps the page</span>
                 </span>
-                <span class="ml-auto text-dim">try: <span class="text-pink">lab</span></span>
+                <span class="ml-auto text-dim whitespace-nowrap">try: <span class="text-pink">lab</span></span>
             </div>
             <div
                 ref="scrollEl"

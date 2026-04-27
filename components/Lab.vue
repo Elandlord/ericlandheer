@@ -1,22 +1,22 @@
 <template>
-    <div id="lab" class="max-w-[1200px] mx-auto px-6 relative z-[2]" style="margin-top: 100px">
+    <div id="lab" class="max-w-[1200px] mx-auto px-4 md:px-6 relative z-[2]" style="margin-top: 100px">
         <div class="reveal">
             <SectionIntro id="lab" kicker="side projects · won't be products" title="The lab." />
             <DockerFrame>
                 <div
-                    class="font-mono-chrome grid"
+                    class="font-mono-chrome hidden md:grid"
                     style="font-size:11px;color:#64748b;letter-spacing:1.2px;padding:10px 18px;border-bottom:1px solid rgba(148,163,184,0.14);background:rgba(17,24,39,0.3);grid-template-columns:40px 1fr 90px 120px 90px;gap:16px;text-transform:uppercase"
                 >
                     <span>#</span><span>service</span><span>status</span><span>ports</span><span>uptime</span>
                 </div>
-                <div class="px-[18px]" style="padding-bottom: 24px">
+                <div class="px-3 md:px-[18px]" style="padding-bottom: 24px">
                     <p
                         class="font-sans text-text"
                         style="margin:14px 0 22px;font-size:15px;line-height:1.7;max-width:720px"
                     >
                         What I'm building when nobody's asking. LLM agents, RAG over my notes, pixel villages. Giving the models something interesting to do. Each container runs on my homelab.
                     </p>
-                    <div class="grid gap-[14px]" style="grid-template-columns: repeat(2, 1fr)">
+                    <div class="grid gap-[14px] grid-cols-1 md:grid-cols-2">
                         <div
                             v-for="(p, i) in LAB"
                             :key="p.title"
@@ -30,13 +30,13 @@
                                 :style="{ height: '2px', background: colors[i % colors.length], opacity: open === i ? 1 : 0.45, transition: 'opacity .25s' }"
                             />
                             <div
-                                class="font-mono-chrome grid items-center text-text"
-                                style="font-size:11.5px;padding:12px 16px 10px;grid-template-columns:40px 1fr 90px 120px 90px;gap:16px;border-bottom:1px dashed rgba(148,163,184,0.14)"
+                                class="font-mono-chrome grid items-center text-text grid-cols-[28px_1fr_auto] md:grid-cols-[40px_1fr_90px_120px_90px] gap-3 md:gap-4"
+                                style="font-size:11.5px;padding:12px 14px 10px;border-bottom:1px dashed rgba(148,163,184,0.14)"
                             >
                                 <span class="text-dim">{{ String(i + 1).padStart(2, '0') }}</span>
-                                <span class="flex items-center gap-2">
+                                <span class="flex items-center gap-2 min-w-0">
                                     <span
-                                        class="grid place-items-center"
+                                        class="grid place-items-center shrink-0"
                                         :style="{
                                             width: '18px',
                                             height: '18px',
@@ -46,7 +46,7 @@
                                             border: `1px solid ${colors[i % colors.length]}66`,
                                         }"
                                     >{{ p.glyph }}</span>
-                                    <span class="text-head">{{ p.title.toLowerCase().replace(/\s+/g, '-') }}</span>
+                                    <span class="text-head truncate">{{ p.title.toLowerCase().replace(/\s+/g, '-') }}</span>
                                 </span>
                                 <span class="text-lime flex items-center gap-[5px]">
                                     <span
@@ -54,8 +54,8 @@
                                     />
                                     Up
                                 </span>
-                                <span class="text-cyan">{{ ports[i % 8] }}</span>
-                                <span class="text-dim">{{ uptimes[i % 8] }}</span>
+                                <span class="text-cyan hidden md:inline">{{ ports[i % 8] }}</span>
+                                <span class="text-dim hidden md:inline">{{ uptimes[i % 8] }}</span>
                             </div>
                             <div style="padding: 16px 16px 18px">
                                 <h3

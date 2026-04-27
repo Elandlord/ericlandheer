@@ -1,19 +1,26 @@
 <template>
-    <div id="skills" class="max-w-[1200px] mx-auto px-6 relative z-[2]" style="margin-top: 100px">
+    <div id="skills" class="max-w-[1200px] mx-auto px-4 md:px-6 relative z-[2]" style="margin-top: 100px">
         <div class="reveal">
             <SectionIntro id="skills" kicker="what I reach for" title="The toolkit." />
             <IdeFrame :tabs="tabs" :tree="tree" :active="active" @update:active="active = $event">
                 <div
-                    class="font-mono-chrome"
-                    style="padding: 26px 30px; font-size: 13px; line-height: 1.8; background: rgba(3,6,17,0.3); min-height: 480px"
+                    class="font-mono-chrome px-4 md:px-[30px] py-5 md:py-[26px]"
+                    style="font-size: 13px; line-height: 1.8; background: rgba(3,6,17,0.3); min-height: 480px"
                 >
                     <Transition name="tab-swap" mode="out-in">
-                        <pre
+                        <div
+                            v-if="highlighted?.[cur.name]"
                             :key="cur.name"
-                            class="font-mono-chrome text-text"
-                            style="margin: 0; padding: 0; white-space: pre; overflow-x: auto; font-size: 13px; line-height: 1.8; background: none; border: none;"
+                            class="shiki-host overflow-x-auto"
+                            v-html="highlighted[cur.name]"
+                        />
+                        <pre
+                            v-else
+                            :key="`raw-${cur.name}`"
+                            class="font-mono-chrome text-text m-0 p-0"
+                            style="white-space: pre; overflow-x: auto; font-size: 13px; line-height: 1.8; background: none; border: none;"
                             v-text="cur.code"
-                        ></pre>
+                        />
                     </Transition>
                     <div
                         class="flex flex-wrap gap-[6px]"
@@ -54,7 +61,7 @@ const SKILL_COLORS: Record<Skill['tag'], { dot: string }> = {
     infra: { dot: '#f472b6' },
 };
 
-const active = ref(SKILLS[0].name);
+const active = ref(SKILLS[0]?.name ?? '');
 
 const fileFor = (s: Skill): string => {
     if (s.lang === 'docker') return 'Dockerfile';
@@ -78,7 +85,30 @@ const tabs = computed(() =>
     SKILLS.map((s) => ({ id: s.name, filename: fileFor(s), dot: SKILL_COLORS[s.tag].dot })),
 );
 
-const cur = computed(() => SKILLS.find((s) => s.name === active.value) || SKILLS[0]);
+const cur = computed(() => SKILLS.find((s) => s.name === active.value) ?? SKILLS[0]!);
+
+const shikiLang = (lang: string): string => {
+    if (lang === 'docker') return 'dockerfile';
+    if (lang === 'yaml') return 'yaml';
+    return lang;
+};
+
+const { data: highlighted } = await useAsyncData('skills-highlighted', async () => {
+    const { createHighlighter } = await import('shiki');
+    const hl = await createHighlighter({
+        themes: ['night-owl'],
+        langs: ['php', 'vue', 'html', 'dockerfile', 'go', 'yaml'],
+    });
+    const out: Record<string, string> = {};
+    for (const s of SKILLS) {
+        out[s.name] = hl.codeToHtml(s.code, {
+            lang: shikiLang(s.lang),
+            theme: 'night-owl',
+        });
+    }
+    hl.dispose();
+    return out;
+});
 </script>
 
 <style scoped>
@@ -93,5 +123,22 @@ const cur = computed(() => SKILLS.find((s) => s.name === active.value) || SKILLS
 .tab-swap-leave-to {
     opacity: 0;
     transform: translateY(-6px);
+}
+.shiki-host :deep(pre.shiki) {
+    margin: 0;
+    padding: 0;
+    background: transparent !important;
+    font-size: 13px;
+    line-height: 1.8;
+    font-family: inherit;
+    overflow-x: auto;
+}
+.shiki-host :deep(pre.shiki code) {
+    font-family: inherit;
+    background: transparent;
+    display: block;
+}
+.shiki-host :deep(pre.shiki .line) {
+    min-height: 1em;
 }
 </style>

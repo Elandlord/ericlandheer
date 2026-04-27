@@ -1,9 +1,9 @@
 <template>
-    <div id="about" class="max-w-[1200px] mx-auto px-6 relative z-[2]" style="margin-top: 90px">
+    <div id="about" class="max-w-[1200px] mx-auto px-4 md:px-6 relative z-[2]" style="margin-top: 90px">
         <div class="reveal">
             <SectionIntro id="about" kicker="who am I" title="A decade of shipping." />
             <ReadmeFrame>
-                <div class="grid" style="grid-template-columns: 1.5fr 1fr; gap: 40px">
+                <div class="grid grid-cols-1 md:grid-cols-[1.5fr_1fr] gap-8 md:gap-10">
                     <div class="text-text" style="font-size: 17px; line-height: 1.75">
                         <p class="m-0">
                             Ten-plus years in. Full stack engineer from Groningen. I build practical, scalable software. Mostly Laravel, Symfony, Vue and Nuxt. Go, NATS and Docker when a problem calls for them.

@@ -1,5 +1,5 @@
 <template>
-    <div id="experience" class="max-w-[1200px] mx-auto px-6 relative z-[2]" style="margin-top: 100px">
+    <div id="experience" class="max-w-[1200px] mx-auto px-4 md:px-6 relative z-[2]" style="margin-top: 100px">
         <div class="reveal">
             <SectionIntro id="experience" kicker="chronological, newest first" title="Where I've built." />
             <GitLogFrame>

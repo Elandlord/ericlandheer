@@ -1,8 +1,8 @@
 <template>
-    <div id="contact" class="max-w-[1200px] mx-auto px-6 relative z-[2]" style="margin-top: 110px">
+    <div id="contact" class="max-w-[1200px] mx-auto px-4 md:px-6 relative z-[2]" style="margin-top: 110px">
         <div class="reveal">
             <VimFrame>
-                <div class="grid items-center" style="grid-template-columns: 1.4fr 1fr; gap: 40px">
+                <div class="grid items-center grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-8 md:gap-10">
                     <div>
                         <div
                             class="font-mono-chrome text-dim"
@@ -46,8 +46,8 @@
                         </div>
                     </div>
                     <div
-                        class="font-mono-chrome border border-line"
-                        style="font-size:13px;line-height:1.8;background:rgba(3,6,17,0.7);padding:24px"
+                        class="font-mono-chrome border border-line p-4 md:p-6 overflow-x-auto"
+                        style="font-size:13px;line-height:1.8;background:rgba(3,6,17,0.7)"
                     >
                         <div class="text-dim" style="margin-bottom: 10px"># where to find me</div>
                         <div>

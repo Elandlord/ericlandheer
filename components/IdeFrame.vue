@@ -4,20 +4,20 @@
         style="background: rgba(10,15,31,0.78); box-shadow: 0 20px 60px -20px rgba(0,0,0,0.6)"
     >
         <div
-            class="px-[14px] py-2 border-b border-line font-mono-chrome text-[11px] flex items-center"
-            style="background: rgba(17,24,39,0.6); color: #7d8590; gap: 18px"
+            class="px-[14px] py-2 border-b border-line font-mono-chrome text-[11px] flex items-center gap-3 md:gap-[18px]"
+            style="background: rgba(17,24,39,0.6); color: #7d8590"
         >
             <span class="flex gap-[6px]">
                 <span style="width:10px;height:10px;border-radius:5px;background:#ef4444" />
                 <span style="width:10px;height:10px;border-radius:5px;background:#f59e0b" />
                 <span style="width:10px;height:10px;border-radius:5px;background:#10b981" />
             </span>
-            <span>File</span><span>Edit</span><span>Selection</span><span>View</span><span>Go</span>
+            <span class="hidden sm:inline">File</span><span class="hidden sm:inline">Edit</span><span class="hidden md:inline">Selection</span><span class="hidden md:inline">View</span><span class="hidden md:inline">Go</span>
             <span class="ml-auto" style="color: #22d3ee">skills.workspace</span>
         </div>
-        <div style="display:grid;grid-template-columns:220px 1fr;min-height:580px">
+        <div class="grid grid-cols-1 md:grid-cols-[220px_1fr]" style="min-height:580px">
             <aside
-                class="border-r border-line font-mono-chrome text-[12px]"
+                class="hidden md:block border-r border-line font-mono-chrome text-[12px]"
                 style="background: rgba(3,6,17,0.6); padding: 14px 10px"
             >
                 <div

@@ -1,6 +1,6 @@
 <template>
-    <section class="max-w-[1200px] mx-auto px-6 relative z-[2]" style="margin-top: 22px">
-        <div class="grid" :style="gridStyle">
+    <section class="max-w-[1200px] mx-auto px-4 md:px-6 relative z-[2]" style="margin-top: 22px">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-[10px]">
             <div
                 v-for="(s, i) in stats"
                 :key="s.label"
@@ -38,7 +38,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import { JOBS, LAB, PACKAGES, SKILLS, TIMELINE } from '~/data/site';
 
 interface Stat {
@@ -58,8 +57,4 @@ const stats: Stat[] = [
     { label: 'timeline entries', value: TIMELINE.length, color: '#67e8f9', glyph: '●' },
 ];
 
-const gridStyle = computed(() => ({
-    gridTemplateColumns: `repeat(${stats.length}, 1fr)`,
-    gap: '10px',
-}));
 </script>
