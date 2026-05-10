@@ -157,24 +157,23 @@ export const SKILLS: Skill[] = [
 
 namespace App\\Http\\Controllers;
 
-use App\\Models\\Order;
-use App\\Services\\InvoiceService;
+use App\\Services\\HaikuService;
 use Illuminate\\Http\\JsonResponse;
 
-final class OrderController extends Controller
+final class TeapotController extends Controller
 {
     public function __construct(
-        private readonly InvoiceService $invoices,
+        private readonly HaikuService $haikus,
     ) {}
 
-    public function show(Order $order): JsonResponse
+    // RFC 2324 — server is a teapot, not a coffee pot.
+    public function brew(): JsonResponse
     {
-        $invoice = $this->invoices->generate($order);
-
         return response()->json([
-            'order'   => $order,
-            'invoice' => $invoice,
-        ]);
+            'status' => 418,
+            'reason' => "I'm a teapot",
+            'haiku'  => $this->haikus->random(),
+        ], 418);
     }
 }`,
     },
@@ -184,31 +183,30 @@ final class OrderController extends Controller
         tag: 'frontend',
         lang: 'vue',
         code: `<script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 
-interface Props {
-    title: string;
-    items: string[];
+const KONAMI = [
+    'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+    'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+    'b', 'a',
+];
+
+const unlocked = ref(false);
+const buffer = ref<string[]>([]);
+
+function onKey(e: KeyboardEvent) {
+    buffer.value = [...buffer.value, e.key].slice(-KONAMI.length);
+    if (buffer.value.join() === KONAMI.join()) unlocked.value = true;
 }
 
-const { title, items } = defineProps<Props>();
-const search = ref('');
-
-const filtered = computed(() =>
-    items.filter(i => i.includes(search.value)),
-);
+onMounted(() => window.addEventListener('keydown', onKey));
+onBeforeUnmount(() => window.removeEventListener('keydown', onKey));
 </script>
 
 <template>
-    <section>
-        <h2>{{ title }}</h2>
-        <input v-model="search" placeholder="Filter..." />
-        <ul>
-            <li v-for="item in filtered" :key="item">
-                {{ item }}
-            </li>
-        </ul>
-    </section>
+    <div v-if="unlocked" class="rainbow">
+        🎉 30 free lives unlocked.
+    </div>
 </template>`,
     },
     {
@@ -217,23 +215,28 @@ const filtered = computed(() =>
         tag: 'frontend',
         lang: 'html',
         code: `<div class="flex min-h-screen items-center justify-center bg-gray-950">
-    <article class="max-w-md rounded-2xl border border-white/10
-                    bg-white/5 p-8 shadow-xl backdrop-blur">
-        <span class="text-xs font-semibold uppercase tracking-widest
-                     text-pink-400">
-            Featured
-        </span>
-        <h2 class="mt-2 text-2xl font-bold text-white">
-            Card title
-        </h2>
-        <p class="mt-3 text-sm leading-relaxed text-gray-400">
-            Clean hierarchy, consistent spacing, responsive by default.
-        </p>
-        <button class="mt-6 rounded-lg bg-cyan-500 px-4 py-2
-                       text-sm font-medium text-gray-950
-                       transition hover:bg-cyan-400">
-            Get started
-        </button>
+    <article class="flex max-w-md items-center gap-6 rounded-2xl
+                    border border-white/10 bg-white/5 p-6
+                    shadow-xl backdrop-blur">
+        <div class="relative h-32 w-32 shrink-0">
+            <div class="absolute inset-0 animate-spin rounded-full
+                        bg-gradient-to-br from-zinc-800 to-black
+                        shadow-inner [animation-duration:6s]">
+                <div class="absolute inset-1/3 rounded-full
+                            bg-gradient-to-br from-pink-500
+                            to-cyan-400" />
+            </div>
+        </div>
+        <div>
+            <span class="text-xs font-semibold uppercase tracking-widest
+                         text-pink-400">
+                Now spinning
+            </span>
+            <h2 class="mt-1 text-xl font-bold text-white">
+                In Rainbows
+            </h2>
+            <p class="text-sm text-gray-400">Radiohead — 2007</p>
+        </div>
     </article>
 </div>`,
     },
@@ -242,25 +245,24 @@ const filtered = computed(() =>
         blurb: 'Predictable local and CI environments across services and platforms.',
         tag: 'infra',
         lang: 'docker',
-        code: `FROM node:22-alpine AS base
+        code: `# A multi-stage build for an ASCII-art microservice.
+FROM python:3.12-alpine AS base
 WORKDIR /app
 
 FROM base AS deps
-COPY package*.json ./
-RUN npm ci --omit=dev
+COPY requirements.txt ./
+RUN pip wheel --wheel-dir=/wheels -r requirements.txt
 
-FROM base AS builder
-COPY package*.json ./
-RUN npm ci
+FROM base AS runtime
+ENV PYTHONUNBUFFERED=1
+COPY --from=deps /wheels /wheels
+RUN pip install --no-index --find-links=/wheels \\
+    pillow click flask && rm -rf /wheels
 COPY . .
-RUN npm run build
+EXPOSE 5000
 
-FROM base AS runner
-ENV NODE_ENV=production
-COPY --from=deps    /app/node_modules ./node_modules
-COPY --from=builder /app/.output      ./.output
-EXPOSE 3000
-CMD ["node", ".output/server/index.mjs"]`,
+# POST /asciify { "url": "..." } -> { "art": "..." }
+CMD ["flask", "--app", "asciify", "run", "--host=0.0.0.0"]`,
     },
     {
         name: 'Go',
@@ -272,20 +274,34 @@ CMD ["node", ".output/server/index.mjs"]`,
 import (
     "encoding/json"
     "log"
+    "math/rand"
     "net/http"
 )
 
-type HealthResponse struct {
-    Status string \`json:"status"\`
+var answers = []string{
+    "It is certain.",
+    "Reply hazy, try again.",
+    "Don't count on it.",
+    "Outlook good.",
+    "Ask again later.",
+    "Without a doubt.",
+    "Cannot predict now.",
+    "Very doubtful.",
 }
 
-func healthHandler(w http.ResponseWriter, r *http.Request) {
-    w.Header().Set("Content-Type", "application/json")
-    json.NewEncoder(w).Encode(HealthResponse{Status: "ok"})
+type Answer struct {
+    Question string \`json:"question"\`
+    Answer   string \`json:"answer"\`
+}
+
+func eightBall(w http.ResponseWriter, r *http.Request) {
+    q := r.URL.Query().Get("q")
+    a := answers[rand.Intn(len(answers))]
+    json.NewEncoder(w).Encode(Answer{Question: q, Answer: a})
 }
 
 func main() {
-    http.HandleFunc("/health", healthHandler)
+    http.HandleFunc("/8ball", eightBall)
     log.Fatal(http.ListenAndServe(":8080", nil))
 }`,
     },
@@ -294,23 +310,23 @@ func main() {
         blurb: 'NATS, Kafka, RabbitMQ. Reliable async workflows between services.',
         tag: 'infra',
         lang: 'yaml',
-        code: `# NATS JetStream consumer
+        code: `# NATS JetStream — coffee.orders event flow
 consumers:
-  - name: order-processor
-    stream: ORDERS
-    durable: order-processor
+  - name: barista
+    stream: COFFEE
+    durable: barista
     deliver_policy: all
     ack_policy: explicit
     max_deliver: 5
-    ack_wait: 30s
-    filter_subject: orders.created
+    ack_wait: 90s          # 90s to pull a shot before redeliver
+    filter_subject: coffee.orders.placed
 
 streams:
-  - name: ORDERS
+  - name: COFFEE
     subjects:
-      - orders.>
+      - coffee.orders.>    # placed, started, ready, served
     retention: limits
-    max_age: 72h
+    max_age: 24h
     storage: file
     num_replicas: 3`,
     },

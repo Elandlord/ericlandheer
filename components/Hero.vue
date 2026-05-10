@@ -73,7 +73,7 @@
                             <span>eric.png → ascii.txt</span>
                             <span class="ml-auto text-lime">● live</span>
                         </div>
-                        <AsciiPortrait :scale="1.15" :loop="true" :morph-ms="2600" :hold-ms="2400" />
+                        <AsciiPortrait :scale="0.92" :loop="true" :morph-ms="2600" :hold-ms="2400" />
                         <div
                             class="font-mono-chrome text-dim flex justify-between"
                             style="font-size: 10.5px; margin-top: 14px"
