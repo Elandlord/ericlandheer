@@ -33,7 +33,7 @@
                             <div class="flex items-baseline gap-[10px] flex-wrap">
                                 <span class="text-amber">{{ hashes[idx] || 'commit00' }}</span>
                                 <span class="text-dim">(</span>
-                                <template v-if="j.upcoming">
+                                <template v-if="!j.until">
                                     <span class="text-amber">HEAD →</span>
                                     <span class="text-pink">simplicate</span>
                                 </template>
@@ -57,17 +57,17 @@
                                 <span class="text-dim">@</span>
                                 <span
                                     class="font-sans font-medium"
-                                    :style="{ fontSize: '16px', color: j.upcoming ? '#fbbf24' : '#22d3ee' }"
+                                    :style="{ fontSize: '16px', color: (!j.until && j.type === 'work') ? '#fbbf24' : '#22d3ee' }"
                                 >{{ j.company }}</span>
                                 <span
                                     class="font-mono-chrome"
                                     :style="pillStyle(j.type)"
                                 >{{ pillLabel(j.type) }}</span>
                                 <span
-                                    v-if="j.upcoming"
+                                    v-if="!j.until"
                                     class="font-mono-chrome"
                                     style="font-size:10.5px;padding:3px 8px;color:#fbbf24;background:#fbbf2411;border:1px solid #fbbf2455;letter-spacing:1px"
-                                >UPCOMING · JUN 2026</span>
+                                >CURRENT</span>
                                 <a
                                     v-if="j.url"
                                     :href="j.url"
@@ -103,7 +103,7 @@ import { TIMELINE, fmtPeriod, type Job } from '~/data/site';
 const hashes = ['c0ffee1','9b4ac3a','5e21110','a1b4e2c','f93c0aa','4d3a872','8cf1102','2e7b6d1','73abcd0','19bd002','dfa8821','1a2b3c4'];
 
 function typeColor(j: Job): string {
-    if (j.upcoming) return '#fbbf24';
+    if (!j.until && j.type === 'work') return '#fbbf24';
     if (j.type === 'work') return '#22d3ee';
     if (j.type === 'school') return '#a78bfa';
     return '#f472b6';
@@ -117,7 +117,7 @@ function dotStyle(j: Job) {
         height: '13px',
         borderRadius: '7px',
         background: col,
-        boxShadow: j.upcoming ? `0 0 0 4px #fbbf2422, 0 0 14px #fbbf24` : `0 0 0 3px #050814`,
+        boxShadow: (!j.until && j.type === 'work') ? `0 0 0 4px #fbbf2422, 0 0 14px #fbbf24` : `0 0 0 3px #050814`,
         border: `2px solid ${col}`,
         position: 'relative' as const,
     };

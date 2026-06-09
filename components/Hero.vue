@@ -15,7 +15,7 @@
                         />
                         <span class="text-text shrink-0">based in Groningen</span>
                         <span class="text-dim shrink-0">·</span>
-                        <span class="text-amber truncate">starting at simplicate, june 2026</span>
+                        <span class="text-amber truncate">senior engineer @ simplicate</span>
                     </div>
                     <h1
                         class="font-sans font-bold text-head"
@@ -90,8 +90,7 @@
 
 <script setup lang="ts">
 const typedStrings = [
-    'shipping print infrastructure @ peterprint',
-    'packing for simplicate (june 2026)',
+    'shipping @ simplicate',
     'wiring LLM agents into pixel villages',
     'writing RAG over my obsidian vault',
     'reviewing code & coaching my squad',

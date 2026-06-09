@@ -9,7 +9,6 @@ export interface Job {
     until: string | null;
     description: string;
     type: JobType;
-    upcoming?: boolean;
     url?: string;
 }
 
@@ -45,9 +44,8 @@ export const JOBS: Job[] = [
         from: '2026-06',
         until: null,
         description:
-            'Joining the Simplicate engineering team to help build their business software platform for professional services.',
+            'Building Simplicate\'s business software platform for professional services. Symfony, complex domain logic, a large PHP codebase with depth.',
         type: 'work',
-        upcoming: true,
     },
     {
         title: 'Developer · Scrum Master',
@@ -142,8 +140,8 @@ export const EDUCATION: Job[] = [
 ];
 
 export const TIMELINE: Job[] = [...JOBS, ...EDUCATION].sort((a, b) => {
-    const ak = a.upcoming ? Infinity : new Date((a.until || '2099-01') + '-01').getTime();
-    const bk = b.upcoming ? Infinity : new Date((b.until || '2099-01') + '-01').getTime();
+    const ak = new Date((a.until || '2099-01') + '-01').getTime();
+    const bk = new Date((b.until || '2099-01') + '-01').getTime();
     return bk - ak;
 });
 

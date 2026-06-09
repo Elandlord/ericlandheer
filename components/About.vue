@@ -9,10 +9,10 @@
                             Ten-plus years in. Full stack engineer from Groningen. I build practical, scalable software. Mostly Laravel, Symfony, Vue and Nuxt. Go, NATS and Docker when a problem calls for them.
                         </p>
                         <p style="margin-top: 18px">
-                            Right now I'm at <span class="text-amber">PeterPrint</span>. Magento 2 storefront, a fleet of Symfony microservices, Nuxt front-ends, a lot of NATS in between. Back-end code reviews land on my desk. I run the team's Scrum as well.
+                            Right now I'm at <span class="text-amber">Simplicate</span>. Building their business software platform for professional services — Symfony, complex domain logic, a large PHP codebase with real depth. Joined June 2026.
                         </p>
                         <p style="margin-top: 18px">
-                            Before that I ran <span class="text-head">MEN Technology &amp; Media</span> for eight years. My own studio, end to end. Laravel and Vue apps for clients in the Netherlands, from discovery to hosting.
+                            Before that I was at <span class="text-head">PeterPrint</span> for four years. Magento 2, a fleet of Symfony microservices, Nuxt front-ends, a lot of NATS in between. Back-end code reviews and Scrum on top of that.
                         </p>
                         <p class="text-dim" style="margin-top: 18px">
                             Side time goes to the <a href="#lab" class="text-pink no-underline">lab</a>. LLM agents, pixel villages, a self-hosted brain over my Obsidian vault. Not products. Just giving the models something interesting to do.
@@ -26,8 +26,8 @@
                         <div><span class="text-violet">"years_shipping"</span>: <span class="text-amber">10+</span>,</div>
                         <div><span class="text-violet">"home"</span>: <span class="text-lime">"Groningen, NL"</span>,</div>
                         <div><span class="text-violet">"stack"</span>: [<span class="text-lime">"php","ts","go"</span>],</div>
-                        <div><span class="text-violet">"next_chapter"</span>: <span class="text-lime">"simplicate"</span>,</div>
-                        <div><span class="text-violet">"starts"</span>: <span class="text-pink">"2026-06-01"</span>,</div>
+                        <div><span class="text-violet">"current"</span>: <span class="text-lime">"simplicate"</span>,</div>
+                        <div><span class="text-violet">"since"</span>: <span class="text-pink">"2026-06"</span>,</div>
                         <div><span class="text-violet">"open_to_roles"</span>: <span style="color: #f87171">false</span>,</div>
                         <div><span class="text-violet">"open_to_talking"</span>: <span class="text-lime">true</span></div>
                     </aside>
