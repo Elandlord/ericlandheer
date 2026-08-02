@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "claude-dashboard": {
+      "command": "/usr/local/bin/node",
+      "args": [
+        "/opt/claude-dashboard-mcp/dist/index.js"
+      ],
+      "env": {
+        "DASHBOARD_API_URL": "https://api.ericlandheer.nl/api",
+        "DASHBOARD_TASK_TOKEN": "tsk.019fc3a3-a4e2-7ad6-8b09-443181af1915.1785697417.1f2e3ea52858285a6980c5d598ccecc142308ffaebc0bec72152e7ecbae8f729"
+      }
+    },
+    "mempalace": {
+      "type": "sse",
+      "url": "http://host.docker.internal:3002/sse",
+      "env": {
+        "DASHBOARD_TASK_TOKEN": "tsk.019fc3a3-a4e2-7ad6-8b09-443181af1915.1785697417.1f2e3ea52858285a6980c5d598ccecc142308ffaebc0bec72152e7ecbae8f729"
+      }
+    }
+  }
+}
