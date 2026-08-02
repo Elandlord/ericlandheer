@@ -65,14 +65,14 @@ describe('toRepoSummaries', () => {
         const summaries = toRepoSummaries(repos);
 
         expect(summaries).toHaveLength(MAX_REPOS);
-        expect(summaries[0].name).toBe('repo-19');
+        expect(summaries[0]?.name).toBe('repo-19');
     });
 
     it('defaults a null description to an empty string and missing topics to an empty list', () => {
         const [summary] = toRepoSummaries([makeRepo({ description: null, topics: undefined })]);
 
-        expect(summary.description).toBe('');
-        expect(summary.topics).toEqual([]);
+        expect(summary?.description).toBe('');
+        expect(summary?.topics).toEqual([]);
     });
 
     it('returns an empty list for no repos', () => {

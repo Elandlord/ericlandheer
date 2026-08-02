@@ -27,7 +27,7 @@ export function parseItems(xml: string): Plaatje[] {
 }
 
 export function selectPool(items: Plaatje[], dayIndex: number): Plaatje[] {
-    const today = DAYS_NL[dayIndex];
+    const today = DAYS_NL[dayIndex] ?? '';
     const matching = items.filter((it) => `${it.naam} ${it.categorie}`.toLowerCase().includes(today));
     return matching.length > 0 ? matching : items;
 }
