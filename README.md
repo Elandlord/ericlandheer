@@ -20,7 +20,7 @@ npm run dev          # http://localhost:3000
 ## Build
 
 ```bash
-npm run build        # Nitro output for Cloudflare Pages
+npm run build        # Nitro output (node-server preset by default; see NITRO_PRESET below)
 npm run preview
 ```
 
