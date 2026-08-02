@@ -2,13 +2,13 @@ const RSS_URL = 'https://www.deelplaatjes.nl/webmasters/rss?i=dagen-vd-week';
 const DAYS_NL = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'];
 const USER_AGENT = 'ericlandheer.nl/2.0 (+https://ericlandheer.nl)';
 
-interface Plaatje {
+export interface Plaatje {
     naam: string;
     url: string;
     categorie: string;
 }
 
-function parseItems(xml: string): Plaatje[] {
+export function parseItems(xml: string): Plaatje[] {
     const items: Plaatje[] = [];
     const itemRegex = /<item>([\s\S]*?)<\/item>/g;
     const get = (block: string, tag: string) => {
@@ -26,9 +26,13 @@ function parseItems(xml: string): Plaatje[] {
     return items;
 }
 
-export default defineEventHandler(async (event) => {
-    const today = DAYS_NL[new Date().getDay()];
+export function selectPool(items: Plaatje[], dayIndex: number): Plaatje[] {
+    const today = DAYS_NL[dayIndex];
+    const matching = items.filter((it) => `${it.naam} ${it.categorie}`.toLowerCase().includes(today));
+    return matching.length > 0 ? matching : items;
+}
 
+export default defineEventHandler(async (event) => {
     let xml: string;
     try {
         xml = await $fetch<string>(RSS_URL, {
@@ -45,8 +49,7 @@ export default defineEventHandler(async (event) => {
         throw createError({ statusCode: 502, statusMessage: 'No items in feed' });
     }
 
-    const matching = items.filter((it) => `${it.naam} ${it.categorie}`.toLowerCase().includes(today));
-    const pool = matching.length > 0 ? matching : items;
+    const pool = selectPool(items, new Date().getDay());
     const pick = pool[Math.floor(Math.random() * pool.length)];
 
     const imageRes = await fetch(pick.url, { headers: { 'User-Agent': USER_AGENT } });
