@@ -1,4 +1,4 @@
-interface GithubRepo {
+export interface GithubRepo {
     name: string;
     html_url: string;
     description: string | null;
@@ -22,6 +22,23 @@ export interface RepoSummary {
     topics: string[];
 }
 
+export function toRepoSummaries(repos: GithubRepo[]): RepoSummary[] {
+    return repos
+        .filter((r) => !r.fork && !r.archived)
+        .sort((a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime())
+        .slice(0, 12)
+        .map((r) => ({
+            name: r.name,
+            url: r.html_url,
+            description: r.description ?? '',
+            language: r.language,
+            stars: r.stargazers_count,
+            forks: r.forks_count,
+            pushedAt: r.pushed_at,
+            topics: r.topics ?? [],
+        }));
+}
+
 export default defineCachedEventHandler(
     async (event): Promise<RepoSummary[]> => {
         const headers: Record<string, string> = {
@@ -42,20 +59,7 @@ export default defineCachedEventHandler(
             return [];
         }
 
-        return repos
-            .filter((r) => !r.fork && !r.archived)
-            .sort((a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime())
-            .slice(0, 12)
-            .map((r) => ({
-                name: r.name,
-                url: r.html_url,
-                description: r.description ?? '',
-                language: r.language,
-                stars: r.stargazers_count,
-                forks: r.forks_count,
-                pushedAt: r.pushed_at,
-                topics: r.topics ?? [],
-            }));
+        return toRepoSummaries(repos);
     },
     {
         maxAge: 60 * 30,

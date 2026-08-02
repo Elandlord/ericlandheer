@@ -9,6 +9,7 @@
         "preview": "nuxt preview",
         "start": "node .output/server/index.mjs",
         "postinstall": "nuxt prepare",
+        "test": "vitest run",
         "typecheck": "nuxt typecheck"
     },
     "dependencies": {
@@ -23,6 +24,8 @@
     },
     "devDependencies": {
         "@types/node": "^22.10.2",
-        "typescript": "^5.7.2"
+        "@vitest/coverage-v8": "^4.1.10",
+        "typescript": "^5.7.2",
+        "vitest": "^4.1.10"
     }
 }
