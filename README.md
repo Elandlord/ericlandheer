@@ -6,11 +6,9 @@ Personal site for Eric Landheer — Groningen-based full stack engineer.
 
 - **Nuxt 3** (compat v4) — hybrid SSR/SSG
 - **Tailwind CSS** — dark-first design system
-- **GSAP + ScrollTrigger** — scroll-driven reveals
-- **Lenis** — smooth scroll
-- **motion-v** — declarative component animations
+- Hand-rolled IntersectionObserver reveals — scroll-driven animations
 - **Nuxt Icon** — Iconify on demand
-- **Cloudflare Pages** — deploy target
+- **Coolify** — deploy target
 
 ## Develop
 
@@ -48,4 +46,4 @@ npm run start        # node .output/server/index.mjs
 
 ## Glitterplaatje
 
-`/geef-mij-een-glitterplaatje` pulls a day-appropriate Dutch glitter GIF from deelplaatjes.nl via `/api/glitterplaatje`. Works on Cloudflare Pages Functions (no PHP needed).
+`/geef-mij-een-glitterplaatje` pulls a day-appropriate Dutch glitter GIF from deelplaatjes.nl server-side.
