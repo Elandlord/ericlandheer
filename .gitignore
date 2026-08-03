@@ -8,3 +8,7 @@ node_modules
 .DS_Store
 dist
 .wrangler
+
+# runner-local MCP config written per task
+.mcp-task-*.json
+.mcp.json
