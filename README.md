@@ -41,7 +41,6 @@ npm run start        # node .output/server/index.mjs
 
 ### Optional env vars
 
-- `GITHUB_TOKEN` — raises `/api/repos` from the 60 req/hr anonymous GitHub rate limit to 5000 req/hr authenticated.
 - `NITRO_PRESET` — override the default `node-server` preset if you ever redeploy to an edge runtime (e.g. `cloudflare-pages`).
 
 ## Glitterplaatje
