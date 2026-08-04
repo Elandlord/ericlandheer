@@ -87,38 +87,29 @@ async function scrollBottom() {
 }
 
 function run(raw: string) {
-    const cmd = raw.trim().toLowerCase();
     const echo: Line = { k: 'cmd', t: raw };
-    if (!cmd) {
-        lines.value.push(echo);
-        scrollBottom();
-        return;
+    const { kind, targetId, message } = resolveCommand(raw, SECTIONS);
+
+    switch (kind) {
+        case 'echo':
+            lines.value.push(echo);
+            break;
+        case 'clear':
+            lines.value = [{ k: 'sys', t: message }];
+            break;
+        case 'jump':
+            lines.value.push(echo, { k: 'out', t: message });
+            setTimeout(() => {
+                if (targetId) document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 120);
+            break;
+        case 'error':
+            lines.value.push(echo, { k: 'err', t: message });
+            break;
+        default:
+            lines.value.push(echo, { k: 'out', t: message });
     }
-    if (cmd === 'clear') {
-        lines.value = [{ k: 'sys', t: 'cleared.' }];
-        scrollBottom();
-        return;
-    }
-    if (cmd === 'help' || cmd === 'ls') {
-        lines.value.push(echo, { k: 'out', t: 'sections: about · skills · experience · lab · projects · contact' });
-        scrollBottom();
-        return;
-    }
-    if (cmd === 'whoami') {
-        lines.value.push(echo, { k: 'out', t: 'eric.landheer / full stack engineer / Groningen, NL' });
-        scrollBottom();
-        return;
-    }
-    const target = SECTIONS.find((s) => s.id === cmd || cmd.startsWith(s.id));
-    if (target) {
-        lines.value.push(echo, { k: 'out', t: `jumping to #${target.id}…` });
-        setTimeout(() => {
-            document.getElementById(target.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 120);
-        scrollBottom();
-        return;
-    }
-    lines.value.push(echo, { k: 'err', t: `command not found: ${cmd}. try 'help'.` });
+
     scrollBottom();
 }
 
