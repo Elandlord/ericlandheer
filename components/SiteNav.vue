@@ -50,18 +50,18 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { SECTIONS } from '~/data/site';
+import { resolveActiveSection } from '~/utils/activeSection';
 
 const scrolled = ref(false);
 const active = ref('about');
 
 function onScroll() {
     scrolled.value = window.scrollY > 60;
-    let cur = 'about';
-    for (const s of SECTIONS) {
-        const el = document.getElementById(s.id);
-        if (el && el.getBoundingClientRect().top < 140) cur = s.id;
-    }
-    active.value = cur;
+    const offsets = SECTIONS.map((s) => ({
+        id: s.id,
+        top: document.getElementById(s.id)?.getBoundingClientRect().top ?? Infinity,
+    }));
+    active.value = resolveActiveSection(offsets);
 }
 
 onMounted(() => {
