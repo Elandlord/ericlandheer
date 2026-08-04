@@ -4,6 +4,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
+import { computeCountUpValue } from '~/utils/countUp';
 
 const props = withDefaults(
     defineProps<{ to: number; duration?: number; suffix?: string }>(),
@@ -18,10 +19,9 @@ function animate() {
     let start: number | null = null;
     const step = (t: number) => {
         if (start === null) start = t;
-        const p = Math.min(1, (t - start) / props.duration);
-        const eased = 1 - Math.pow(1 - p, 3);
-        display.value = Math.round(props.to * eased);
-        if (p < 1) raf = requestAnimationFrame(step);
+        const elapsed = t - start;
+        display.value = computeCountUpValue(elapsed, props.duration, props.to);
+        if (elapsed < props.duration) raf = requestAnimationFrame(step);
     };
     raf = requestAnimationFrame(step);
 }
