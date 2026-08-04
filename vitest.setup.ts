@@ -1,6 +1,6 @@
-const noop = () => undefined;
+const identity = (handler: unknown) => handler;
 
 Object.assign(globalThis, {
-    defineEventHandler: noop,
-    defineCachedEventHandler: noop,
+    defineEventHandler: identity,
+    defineCachedEventHandler: identity,
 });
