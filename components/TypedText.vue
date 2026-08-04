@@ -5,6 +5,8 @@
 <script setup lang="ts">
 import { ref, watch, onBeforeUnmount } from 'vue';
 
+import { nextTypedTextStep } from '~/utils/typedText';
+
 const props = withDefaults(
     defineProps<{ strings: string[]; speed?: number; pause?: number }>(),
     { speed: 40, pause: 1600 },
@@ -21,27 +23,17 @@ function clear() {
 
 function step() {
     clear();
-    const cur = props.strings[idx.value % props.strings.length];
-    if (!del.value && text.value === cur) {
-        timer = setTimeout(() => {
-            del.value = true;
-            step();
-        }, props.pause);
-        return;
-    }
-    if (del.value && text.value === '') {
-        del.value = false;
-        idx.value += 1;
-        step();
-        return;
-    }
-    timer = setTimeout(
-        () => {
-            text.value = cur.slice(0, del.value ? text.value.length - 1 : text.value.length + 1);
-            step();
-        },
-        del.value ? props.speed / 2 : props.speed,
+    const next = nextTypedTextStep(
+        { text: text.value, del: del.value, idx: idx.value },
+        props.strings,
+        { speed: props.speed, pause: props.pause },
     );
+    timer = setTimeout(() => {
+        text.value = next.text;
+        del.value = next.del;
+        idx.value = next.idx;
+        step();
+    }, next.delayMs);
 }
 
 watch(
