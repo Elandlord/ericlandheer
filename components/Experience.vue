@@ -23,7 +23,7 @@
                             />
                             <span
                                 class="relative z-[1]"
-                                :style="dotStyle(j)"
+                                :style="jobDotStyle(j)"
                             />
                         </div>
                         <div
@@ -61,8 +61,8 @@
                                 >{{ j.company }}</span>
                                 <span
                                     class="font-mono-chrome"
-                                    :style="pillStyle(j.type)"
-                                >{{ pillLabel(j.type) }}</span>
+                                    :style="jobPillStyle(j.type)"
+                                >{{ jobPillLabel(j.type) }}</span>
                                 <span
                                     v-if="!j.until"
                                     class="font-mono-chrome"
@@ -98,50 +98,8 @@
 </template>
 
 <script setup lang="ts">
-import { TIMELINE, fmtPeriod, type Job } from '~/data/site';
+import { TIMELINE, fmtPeriod } from '~/data/site';
+import { jobDotStyle, jobPillLabel, jobPillStyle } from '~/utils/jobStyling';
 
 const hashes = ['c0ffee1','9b4ac3a','5e21110','a1b4e2c','f93c0aa','4d3a872','8cf1102','2e7b6d1','73abcd0','19bd002','dfa8821','1a2b3c4'];
-
-function typeColor(j: Job): string {
-    if (!j.until && j.type === 'work') return '#fbbf24';
-    if (j.type === 'work') return '#22d3ee';
-    if (j.type === 'school') return '#a78bfa';
-    return '#f472b6';
-}
-
-function dotStyle(j: Job) {
-    const col = typeColor(j);
-    return {
-        marginTop: '20px',
-        width: '13px',
-        height: '13px',
-        borderRadius: '7px',
-        background: col,
-        boxShadow: (!j.until && j.type === 'work') ? `0 0 0 4px #fbbf2422, 0 0 14px #fbbf24` : `0 0 0 3px #050814`,
-        border: `2px solid ${col}`,
-        position: 'relative' as const,
-    };
-}
-
-function pillLabel(t: Job['type']) {
-    if (t === 'school') return 'EDU';
-    if (t === 'certification') return 'CERT';
-    return 'WORK';
-}
-function pillStyle(t: Job['type']) {
-    const map: Record<Job['type'], string> = {
-        work: '#22d3ee',
-        school: '#a78bfa',
-        certification: '#fbbf24',
-    };
-    const c = map[t];
-    return {
-        fontSize: '10px',
-        letterSpacing: '1.2px',
-        padding: '3px 7px',
-        color: c,
-        border: `1px solid ${c}55`,
-        background: `${c}11`,
-    };
-}
 </script>
