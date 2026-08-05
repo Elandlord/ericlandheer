@@ -1,7 +1,7 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import type { Plaatje } from './geef-mij-een-glitterplaatje.get';
-import { parseItems, selectPool } from './geef-mij-een-glitterplaatje.get';
+import handler, { parseItems, selectPool } from './geef-mij-een-glitterplaatje.get';
 
 const FEED_XML = `<?xml version="1.0" encoding="UTF-8"?>
 <rss>
@@ -83,5 +83,82 @@ describe('selectPool', () => {
 
     it('falls back to all items when no item matches the day', () => {
         expect(selectPool(ITEMS, THURSDAY)).toEqual(ITEMS);
+    });
+});
+
+describe('default handler', () => {
+    const ALL_DAYS_ITEM_XML = `<rss><channel><item>
+        <naam>Elke dag plaatje</naam>
+        <categorie>zondag maandag dinsdag woensdag donderdag vrijdag zaterdag</categorie>
+        <plaatje_groot_url>https://example.test/elke-dag.gif</plaatje_groot_url>
+    </item></channel></rss>`;
+
+    afterEach(() => {
+        vi.unstubAllGlobals();
+    });
+
+    it('throws a 502 when the RSS feed fetch fails', async () => {
+        vi.stubGlobal('$fetch', vi.fn().mockRejectedValue(new Error('network down')));
+        vi.stubGlobal(
+            'createError',
+            vi.fn((opts) => Object.assign(new Error(opts.statusMessage), opts))
+        );
+
+        await expect(handler({} as never)).rejects.toMatchObject({
+            statusCode: 502,
+            statusMessage: 'Upstream feed unreachable',
+        });
+    });
+
+    it('throws a 502 when the feed has no usable items', async () => {
+        vi.stubGlobal('$fetch', vi.fn().mockResolvedValue('<rss><channel></channel></rss>'));
+        vi.stubGlobal(
+            'createError',
+            vi.fn((opts) => Object.assign(new Error(opts.statusMessage), opts))
+        );
+
+        await expect(handler({} as never)).rejects.toMatchObject({
+            statusCode: 502,
+            statusMessage: 'No items in feed',
+        });
+    });
+
+    it('throws a 502 when the image fetch fails', async () => {
+        vi.stubGlobal('$fetch', vi.fn().mockResolvedValue(ALL_DAYS_ITEM_XML));
+        vi.stubGlobal(
+            'createError',
+            vi.fn((opts) => Object.assign(new Error(opts.statusMessage), opts))
+        );
+        vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: false }));
+
+        await expect(handler({} as never)).rejects.toMatchObject({
+            statusCode: 502,
+            statusMessage: 'Image fetch failed',
+        });
+    });
+
+    it('returns the image bytes and sets response headers on success', async () => {
+        const setHeaderSpy = vi.fn();
+        vi.stubGlobal('$fetch', vi.fn().mockResolvedValue(ALL_DAYS_ITEM_XML));
+        vi.stubGlobal('setHeader', setHeaderSpy);
+        vi.stubGlobal(
+            'fetch',
+            vi.fn().mockResolvedValue({
+                ok: true,
+                headers: new Map([['content-type', 'image/gif']]),
+                arrayBuffer: () => Promise.resolve(new Uint8Array([1, 2, 3]).buffer),
+            })
+        );
+
+        const event = {};
+        const result = await handler(event as never);
+
+        expect(result).toEqual(new Uint8Array([1, 2, 3]));
+        expect(setHeaderSpy).toHaveBeenCalledWith(event, 'Content-Type', 'image/gif');
+        expect(setHeaderSpy).toHaveBeenCalledWith(
+            event,
+            'Cache-Control',
+            'public, max-age=300, s-maxage=300'
+        );
     });
 });
