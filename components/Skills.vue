@@ -54,6 +54,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { SKILLS, type Skill } from '~/data/site';
+import { fileFor, shikiLang } from '~/utils/skillFilename';
 
 const SKILL_COLORS: Record<Skill['tag'], { dot: string }> = {
     backend: { dot: '#22d3ee' },
@@ -62,12 +63,6 @@ const SKILL_COLORS: Record<Skill['tag'], { dot: string }> = {
 };
 
 const active = ref(SKILLS[0]?.name ?? '');
-
-const fileFor = (s: Skill): string => {
-    if (s.lang === 'docker') return 'Dockerfile';
-    const exts: Record<string, string> = { php: '.php', vue: '.vue', html: '.html', go: '.go', yaml: '.yml' };
-    return s.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') + (exts[s.lang] ?? '.txt');
-};
 
 const byTag = computed(() => {
     const b: Record<Skill['tag'], Skill[]> = { backend: [], frontend: [], infra: [] };
@@ -86,12 +81,6 @@ const tabs = computed(() =>
 );
 
 const cur = computed(() => SKILLS.find((s) => s.name === active.value) ?? SKILLS[0]!);
-
-const shikiLang = (lang: string): string => {
-    if (lang === 'docker') return 'dockerfile';
-    if (lang === 'yaml') return 'yaml';
-    return lang;
-};
 
 const { data: highlighted } = await useAsyncData('skills-highlighted', async () => {
     const { createHighlighter } = await import('shiki');
