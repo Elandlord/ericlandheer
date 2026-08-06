@@ -22,7 +22,9 @@ export default defineNuxtConfig({
                 { name: 'theme-color', content: '#050814' },
                 { property: 'og:title', content: 'Eric Landheer' },
                 { property: 'og:description', content: 'Full stack web developer, Groningen.' },
-                { property: 'og:image', content: '/assets/images/eric.png' },
+                { property: 'og:image', content: 'https://ericlandheer.nl/assets/images/eric.png' },
+                { property: 'og:url', content: 'https://ericlandheer.nl' },
+                { property: 'og:type', content: 'website' },
             ],
             link: [
                 { rel: 'icon', type: 'image/png', href: '/favicon.png' },
