@@ -17,7 +17,7 @@
                 style="max-height: 170px; line-height: 1.6"
                 @click="inputEl?.focus()"
             >
-                <div v-for="(l, i) in lines" :key="i" :class="lineColor(l.k)">
+                <div v-for="(l, i) in lines" :key="i" :class="lineColorClass(l.k)">
                     <template v-if="l.k === 'cmd'">
                         <span class="text-pink">➜</span>
                         <span class="text-cyan">~/eric.landheer</span>
@@ -59,8 +59,8 @@
 <script setup lang="ts">
 import { ref, nextTick, onMounted } from 'vue';
 import { SECTIONS } from '~/data/site';
+import { lineColorClass, type Kind } from '~/utils/terminal-commands';
 
-type Kind = 'sys' | 'cmd' | 'out' | 'err';
 interface Line {
     k: Kind;
     t: string;
@@ -74,12 +74,6 @@ const input = ref('');
 const inputEl = ref<HTMLInputElement | null>(null);
 const scrollEl = ref<HTMLDivElement | null>(null);
 const chips = ['about', 'skills', 'experience', 'lab', 'projects', 'contact', 'help'];
-
-function lineColor(k: Kind) {
-    if (k === 'err') return 'text-[#f87171]';
-    if (k === 'sys') return 'text-dim';
-    return 'text-text';
-}
 
 async function scrollBottom() {
     await nextTick();

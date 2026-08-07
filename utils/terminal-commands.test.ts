@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { resolveCommand } from './terminal-commands';
+import { lineColorClass, resolveCommand } from './terminal-commands';
 
 const SECTIONS = [
     { id: 'about' },
@@ -58,5 +58,23 @@ describe('resolveCommand', () => {
             kind: 'error',
             message: "command not found: sudo rm. try 'help'.",
         });
+    });
+});
+
+describe('lineColorClass', () => {
+    it('colors err lines red', () => {
+        expect(lineColorClass('err')).toBe('text-[#f87171]');
+    });
+
+    it('colors sys lines dim', () => {
+        expect(lineColorClass('sys')).toBe('text-dim');
+    });
+
+    it('colors out lines with the default text color', () => {
+        expect(lineColorClass('out')).toBe('text-text');
+    });
+
+    it('colors cmd lines with the default text color', () => {
+        expect(lineColorClass('cmd')).toBe('text-text');
     });
 });
