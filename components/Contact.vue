@@ -21,7 +21,7 @@
                             class="text-text"
                             style="margin: 0 0 24px; font-size: 16px; line-height: 1.7; max-width: 520px"
                         >
-                            Not open to new roles right now. I'm starting at Simplicate in June 2026. Happy to talk NATS, Symfony, Laravel at scale, agent infrastructure. Coffee in Groningen works too.
+                            Not open to new roles right now. {{ roleSentence }} Happy to talk NATS, Symfony, Laravel at scale, agent infrastructure. Coffee in Groningen works too.
                         </p>
                         <div class="flex flex-wrap gap-[10px]">
                             <a
@@ -58,7 +58,7 @@
                         <div>&nbsp;&nbsp;<span class="text-text">github</span>: <span class="text-lime">"Elandlord"</span>,</div>
                         <div>&nbsp;&nbsp;<span class="text-text">linkedin</span>: <span class="text-lime">"ericlandheer"</span>,</div>
                         <div>&nbsp;&nbsp;<span class="text-text">city</span>: <span class="text-lime">"Groningen, NL"</span>,</div>
-                        <div>&nbsp;&nbsp;<span class="text-text">next</span>: <span class="text-lime">"Simplicate, Jun 2026"</span>,</div>
+                        <div>&nbsp;&nbsp;<span class="text-text">next</span>: <span class="text-lime">"{{ currentJob.company }}, {{ currentRole.label }}"</span>,</div>
                         <div>}<span class="text-amber">;</span></div>
                         <div class="text-dim" style="margin-top: 16px"># reply time:</div>
                         <div>
@@ -72,4 +72,17 @@
     </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { computed } from 'vue';
+
+import { JOBS } from '~/data/site';
+import { describeCurrentRole } from '~/utils/employmentStatus';
+
+const currentJob = JOBS.find((job) => job.until === null)!;
+const currentRole = describeCurrentRole(currentJob, new Date());
+const roleSentence = computed(() =>
+    currentRole.verb === 'starting'
+        ? `I'm starting at ${currentJob.company} in ${currentRole.label}.`
+        : `I joined ${currentJob.company} in ${currentRole.label}.`
+);
+</script>
