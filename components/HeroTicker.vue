@@ -7,11 +7,19 @@
 </template>
 
 <script setup lang="ts">
-import { LAB, PACKAGES } from '~/data/site';
+import { JOBS, LAB, PACKAGES } from '~/data/site';
+import { describeCurrentRole } from '~/utils/employmentStatus';
+
+const currentJob = JOBS.find((job) => job.until === null)!;
+const currentRole = describeCurrentRole(currentJob, new Date());
 
 const items = [
     { delta: '◆', text: 'based in Groningen, NL', color: '#22d3ee' },
-    { delta: '→', text: 'starting at Simplicate · Jun 2026', color: '#fbbf24' },
+    {
+        delta: '→',
+        text: `${currentRole.verb} at ${currentJob.company} · ${currentRole.label}`,
+        color: '#fbbf24',
+    },
     { delta: '✓', text: '10+ years shipping', color: '#a3e635' },
     { delta: '●', text: `${LAB.length} lab experiments running`, color: '#a78bfa' },
     { delta: '⇆', text: `${PACKAGES.length} OSS packages maintained`, color: '#f472b6' },

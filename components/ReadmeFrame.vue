@@ -63,6 +63,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
+import { JOBS } from '~/data/site';
+import { describeCurrentRole } from '~/utils/employmentStatus';
+
 const tabs = [
     { id: 'preview', label: 'Preview' },
     { id: 'raw', label: 'Raw' },
@@ -72,11 +75,15 @@ const tabs = [
 type TabId = (typeof tabs)[number]['id'];
 const tab = ref<TabId>('preview');
 
+const currentJob = JOBS.find((job) => job.until === null)!;
+const currentRole = describeCurrentRole(currentJob, new Date());
+const roleVerb = currentRole.verb === 'starting' ? 'Starting' : 'Joined';
+
 const rawLines = [
     '# Eric Landheer',
     '',
     '> Full stack engineer. Based in Groningen, NL.',
-    '> Starting at [Simplicate](https://simplicate.com) in June 2026.',
+    `> ${roleVerb} at [${currentJob.company}](https://simplicate.com) in ${currentRole.label}.`,
     '',
     '## what I do',
     '',
