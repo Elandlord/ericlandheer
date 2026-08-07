@@ -6,6 +6,14 @@ export interface TerminalCommand {
     message: string;
 }
 
+export type Kind = 'sys' | 'cmd' | 'out' | 'err';
+
+export function lineColorClass(kind: Kind): string {
+    if (kind === 'err') return 'text-[#f87171]';
+    if (kind === 'sys') return 'text-dim';
+    return 'text-text';
+}
+
 const HELP_MESSAGE = 'sections: about · skills · experience · lab · projects · contact';
 const WHOAMI_MESSAGE = 'eric.landheer / full stack engineer / Groningen, NL';
 
