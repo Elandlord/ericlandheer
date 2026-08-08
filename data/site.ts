@@ -12,12 +12,20 @@ export interface Job {
     url?: string;
 }
 
+export type SkillPreviewKind = 'html' | 'konami';
+
+export interface SkillPreview {
+    kind: SkillPreviewKind;
+    note: string;
+}
+
 export interface Skill {
     name: string;
     blurb: string;
     tag: 'backend' | 'frontend' | 'infra';
     lang: string;
     code: string;
+    preview?: SkillPreview;
 }
 
 export interface LabProject {
@@ -206,6 +214,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKey));
         🎉 30 free lives unlocked.
     </div>
 </template>`,
+        preview: { kind: 'konami', note: 'Live component. Type the Konami code, or tap the pad.' },
     },
     {
         name: 'Tailwind CSS',
@@ -237,6 +246,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKey));
         </div>
     </article>
 </div>`,
+        preview: { kind: 'html', note: 'This exact markup, rendered in a sandboxed frame.' },
     },
     {
         name: 'Docker & Kubernetes',

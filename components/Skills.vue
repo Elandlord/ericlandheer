@@ -7,9 +7,30 @@
                     class="font-mono-chrome px-4 md:px-[30px] py-5 md:py-[26px]"
                     style="font-size: 13px; line-height: 1.8; background: rgba(3,6,17,0.3); min-height: 480px"
                 >
+                    <div class="flex items-center gap-1" style="margin-bottom: 16px">
+                        <button
+                            v-for="v in VIEWS"
+                            :key="v.id"
+                            type="button"
+                            class="font-mono-chrome"
+                            :disabled="v.id === 'preview' && !previewAvailable"
+                            :title="v.id === 'preview' && !previewAvailable ? 'This snippet has no browser runtime' : undefined"
+                            :style="{
+                                fontSize: '11px',
+                                padding: '4px 10px',
+                                cursor: v.id === 'preview' && !previewAvailable ? 'not-allowed' : 'pointer',
+                                opacity: v.id === 'preview' && !previewAvailable ? 0.4 : 1,
+                                background: view === v.id ? 'rgba(110,118,129,0.2)' : 'transparent',
+                                color: view === v.id ? '#e6edf3' : '#7d8590',
+                                border: `1px solid ${view === v.id ? 'rgba(148,163,184,0.26)' : 'transparent'}`,
+                            }"
+                            @click="view = v.id"
+                        >{{ v.label }}</button>
+                    </div>
                     <Transition name="tab-swap" mode="out-in">
+                        <SkillPreview v-if="view === 'preview'" :key="`preview-${cur.name}`" :skill="cur" />
                         <div
-                            v-if="highlighted?.[cur.name]"
+                            v-else-if="highlighted?.[cur.name]"
                             :key="cur.name"
                             class="shiki-host overflow-x-auto"
                             v-html="highlighted[cur.name]"
@@ -52,9 +73,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { SKILLS, type Skill } from '~/data/site';
 import { fileFor, shikiLang } from '~/utils/skillFilename';
+import { hasPreview } from '~/utils/skillPreview';
+
+const VIEWS = [
+    { id: 'code', label: 'Code' },
+    { id: 'preview', label: 'Preview' },
+] as const;
+
+type ViewId = (typeof VIEWS)[number]['id'];
 
 const SKILL_COLORS: Record<Skill['tag'], { dot: string }> = {
     backend: { dot: '#22d3ee' },
@@ -81,6 +110,13 @@ const tabs = computed(() =>
 );
 
 const cur = computed(() => SKILLS.find((s) => s.name === active.value) ?? SKILLS[0]!);
+
+const view = ref<ViewId>('code');
+const previewAvailable = computed(() => hasPreview(cur.value));
+
+watch(previewAvailable, (available) => {
+    if (!available) view.value = 'code';
+});
 
 const { data: highlighted } = await useAsyncData('skills-highlighted', async () => {
     const { createHighlighter } = await import('shiki');
