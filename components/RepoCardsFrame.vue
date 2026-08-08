@@ -12,10 +12,19 @@
             </svg>
             <span class="truncate" style="color: #e6edf3">github.com/Elandlord</span>
             <span class="hidden sm:inline">·</span><span class="hidden sm:inline">pinned repositories</span>
-            <span class="ml-auto whitespace-nowrap">2 repos · PHP</span>
+            <span class="ml-auto whitespace-nowrap">{{ summary }}</span>
         </div>
         <div class="px-4 md:px-8 py-5 md:py-7"><slot /></div>
     </section>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { Package } from '~/data/site';
+import { describeRepoSummary } from '~/utils/repoSummary';
+
+const props = defineProps<{
+    packages: Pick<Package, 'lang'>[];
+}>();
+
+const summary = computed(() => describeRepoSummary(props.packages));
+</script>

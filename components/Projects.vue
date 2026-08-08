@@ -2,7 +2,7 @@
     <div id="projects" class="max-w-[1200px] mx-auto px-4 md:px-6 relative z-[2]" style="margin-top: 100px">
         <div class="reveal">
             <SectionIntro id="projects" kicker="open source, in production" title="In the wild." />
-            <RepoCardsFrame>
+            <RepoCardsFrame :packages="PACKAGES">
                 <p
                     class="text-text"
                     style="margin:0 0 22px;font-size:15px;line-height:1.7;max-width:680px"
