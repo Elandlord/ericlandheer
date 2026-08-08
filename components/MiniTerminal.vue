@@ -60,6 +60,7 @@
 import { ref, nextTick, onMounted } from 'vue';
 import { SECTIONS } from '~/data/site';
 import { lineColorClass, type Kind } from '~/utils/terminal-commands';
+import { buildQuickChips } from '~/utils/quickChips';
 
 interface Line {
     k: Kind;
@@ -73,7 +74,7 @@ const lines = ref<Line[]>([
 const input = ref('');
 const inputEl = ref<HTMLInputElement | null>(null);
 const scrollEl = ref<HTMLDivElement | null>(null);
-const chips = ['about', 'skills', 'experience', 'lab', 'projects', 'contact', 'help'];
+const chips = buildQuickChips(SECTIONS);
 
 async function scrollBottom() {
     await nextTick();
