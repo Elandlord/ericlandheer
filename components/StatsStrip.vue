@@ -39,6 +39,7 @@
 
 <script setup lang="ts">
 import { JOBS, LAB, PACKAGES, SKILLS, TIMELINE } from '~/data/site';
+import { yearsShipping } from '~/utils/yearsShipping';
 
 interface Stat {
     label: string;
@@ -49,7 +50,13 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-    { label: 'yrs shipping', value: 10, suffix: '+', color: '#22d3ee', glyph: '◆' },
+    {
+        label: 'yrs shipping',
+        value: yearsShipping(JOBS, new Date()),
+        suffix: '+',
+        color: '#22d3ee',
+        glyph: '◆',
+    },
     { label: 'companies', value: JOBS.length, color: '#a78bfa', glyph: '◼' },
     { label: 'skills', value: SKILLS.length, color: '#f472b6', glyph: '⇆' },
     { label: 'lab experiments', value: LAB.length, color: '#fbbf24', glyph: '◌' },
